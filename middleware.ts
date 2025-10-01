@@ -15,13 +15,20 @@ export function middleware(req: NextRequest) {
   const basicAuth = req.headers.get('Authorization')
   const url = req.nextUrl
 
+  // Проверяем что переменные окружения заданы
+  const validUser = process.env.BASIC_AUTH_USER
+  const validPassword = process.env.BASIC_AUTH_PASSWORD
+
+  if (!validUser || !validPassword) {
+    // Если переменные не заданы - блокируем доступ
+    return new NextResponse('Configuration error: Basic Auth credentials not set', {
+      status: 500,
+    })
+  }
+
   if (basicAuth) {
     const authValue = basicAuth.split(' ')[1]
     const [user, password] = atob(authValue).split(':')
-
-    // Логин и пароль из environment variables
-    const validUser = process.env.BASIC_AUTH_USER || 'admin'
-    const validPassword = process.env.BASIC_AUTH_PASSWORD || 'change-this-password'
 
     if (user === validUser && password === validPassword) {
       // Доступ разрешен
