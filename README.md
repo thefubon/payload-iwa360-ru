@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Payload IVA360 RU
 
-## Getting Started
+Проект на базе **Payload CMS 3.58** + **Next.js 15** + **PostgreSQL (Neon)**
 
-First, run the development server:
+## 🚀 Быстрый старт
+
+### 1. Установка зависимостей
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Настройка переменных окружения
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Файл `.env` уже настроен с:
+- ✅ `DATABASE_URI` - подключение к Neon PostgreSQL
+- ✅ `PAYLOAD_SECRET` - секретный ключ
+- ✅ `NEXT_PUBLIC_SERVER_URL` - URL сервера
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Запуск в режиме разработки
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Приложение будет доступно по адресу: **http://localhost:3000**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Доступ к админ-панели
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+После запуска перейдите по адресу:
 
-## Deploy on Vercel
+```
+http://localhost:3000/admin
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+При первом запуске вам будет предложено создать первого пользователя-администратора.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 API Endpoints
+
+- **REST API**: `http://localhost:3000/api/users`
+- **GraphQL API**: `http://localhost:3000/api/graphql`
+- **GraphQL Playground**: `http://localhost:3000/api/graphql-playground`
+
+## 🗄️ Структура проекта
+
+```
+payload-iwa360-ru/
+├── app/
+│   ├── (frontend)/          # Публичная часть сайта
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   └── (payload)/           # Payload CMS (авто-генерация)
+│       ├── admin/           # Админ панель
+│       └── api/             # API routes
+├── collections/             # Коллекции данных
+│   └── Users.ts            # Коллекция пользователей
+├── payload.config.ts        # Конфигурация Payload
+├── next.config.ts          # Конфигурация Next.js
+└── .env                    # Переменные окружения
+```
+
+## 🔧 Технологии
+
+- **Framework**: Next.js 15.5.4 (App Router)
+- **CMS**: Payload CMS 3.58.0
+- **Database**: PostgreSQL (Neon Cloud)
+- **Rich Text**: Lexical Editor
+- **Styling**: Tailwind CSS 4
+- **Images**: Sharp
+- **API**: REST + GraphQL
+
+## 📝 Доступные коллекции
+
+### Users (Пользователи)
+- Аутентификация включена
+- Поля: email, name, role (admin/user)
+- REST: `/api/users`
+- GraphQL: доступно через playground
+
+### Media (Медиа файлы)
+- Загрузка изображений, PDF, видео
+- Автоматическая генерация размеров (thumbnail, card, tablet)
+- WebP оптимизация
+- Хранение: Vercel Blob (production) / локально (development)
+- REST: `/api/media`
+
+## 🛠️ Команды
+
+```bash
+# Разработка
+pnpm dev
+
+# Сборка для production
+pnpm build
+
+# Запуск production сервера
+pnpm start
+
+# Линтинг
+pnpm lint
+```
+
+## 🔐 Безопасность
+
+- ✅ `.env` файл исключен из Git
+- ✅ PostgreSQL SSL включен (`sslmode=require`)
+- ✅ Payload Secret настроен
+- ✅ TypeScript строгий режим
+
+## 📦 Добавление новых коллекций
+
+1. Создайте файл в `collections/` (например, `Posts.ts`)
+2. Импортируйте в `payload.config.ts`
+3. Добавьте в массив `collections`
+
+Пример:
+
+```typescript
+// collections/Posts.ts
+import { CollectionConfig } from 'payload'
+
+export const Posts: CollectionConfig = {
+  slug: 'posts',
+  admin: {
+    useAsTitle: 'title',
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'content',
+      type: 'richText',
+    },
+  ],
+}
+```
+
+## 🌐 Production Deployment на Vercel
+
+### 📋 Быстрый старт:
+
+Смотрите подробную инструкцию в **[DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+### Краткая версия:
+
+1. **Создайте Vercel Blob Storage** (для загрузки файлов)
+2. **Настройте переменные окружения** в Vercel Dashboard
+3. **Подключите GitHub репозиторий** к Vercel
+4. **Нажмите Deploy!** 🚀
+
+### Обязательные переменные для Vercel:
+
+```env
+PAYLOAD_SECRET=ваш_секрет
+DATABASE_URI=ваш_neon_postgres_url
+NEXT_PUBLIC_SERVER_URL=https://your-app.vercel.app
+BLOB_READ_WRITE_TOKEN=vercel_blob_token
+```
+
+**⚠️ Важно:** На Vercel обычная папка Upload **НЕ работает**! Используется Vercel Blob Storage.
+
+## 📖 Документация
+
+- [Payload CMS Docs](https://payloadcms.com/docs)
+- [Next.js Docs](https://nextjs.org/docs)
+- [Neon Postgres](https://neon.tech/docs)
+
+## 🆘 Поддержка
+
+При возникновении проблем проверьте:
+1. Запущена ли база данных (Neon должен быть активен)
+2. Правильно ли настроены переменные в `.env`
+3. Установлены ли все зависимости (`pnpm install`)
+
+---
+
+Создано с ❤️ для IVA360
