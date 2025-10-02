@@ -3,6 +3,9 @@ import { getPayload } from "payload";
 import config from "@/payload.config";
 import Link from "next/link";
 
+// Отключаем кэширование страницы для получения актуальных данных из Settings
+export const revalidate = 0;
+
 export default async function Home() {
   const payload = await getPayload({ config });
   
