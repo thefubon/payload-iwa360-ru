@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'payload.iwa360.ru',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
         hostname: '*.vercel-storage.com',
         pathname: '/**',
       },
