@@ -8,6 +8,9 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 
+// Import globals
+import { Settings } from './globals/Settings'
+
 export default buildConfig({
   // Server URL - важно для email уведомлений и абсолютных ссылок
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -17,6 +20,9 @@ export default buildConfig({
 
   // Define and configure your collections in this array
   collections: [Users, Media],
+
+  // Define global settings
+  globals: [Settings],
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || '',
@@ -64,18 +70,14 @@ export default buildConfig({
 
   // Storage plugins
   plugins: [
-    // Vercel Blob Storage - автоматически включается только если есть токен
-    // В локальной разработке без токена файлы сохраняются в /media
-    ...(process.env.BLOB_READ_WRITE_TOKEN
-      ? [
-          vercelBlobStorage({
-            enabled: true,
-            collections: {
-              media: true, // Использовать Vercel Blob для коллекции media
-            },
-            token: process.env.BLOB_READ_WRITE_TOKEN,
-          }),
-        ]
-      : []),
+    // Vercel Blob Storage - используется и в production, и в localhost (если есть токен)
+    // Файлы загружаются напрямую в Vercel Blob Storage
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true, // Использовать Vercel Blob для коллекции media
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
   ],
 })
