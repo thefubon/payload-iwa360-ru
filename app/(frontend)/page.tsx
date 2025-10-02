@@ -49,7 +49,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold mb-4 text-blue-900 dark:text-blue-100">
             Данные из Payload Settings:
           </h2>
-          
+
           <div className="space-y-3">
             <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-sm">
               <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold mb-1">
@@ -81,6 +81,7 @@ export default async function Home() {
                   height={logo.height || 100}
                   className="rounded border border-gray-200 dark:border-gray-700"
                   style={{ width: 'auto', height: 'auto', maxWidth: '200px' }}
+                  priority
                 />
               </div>
             )}
@@ -89,8 +90,10 @@ export default async function Home() {
 
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
-            Перейдите в{" "}
-            <Link href="/admin" className="text-blue-600 dark:text-blue-400 hover:underline">
+            Перейдите в{' '}
+            <Link
+              href="/admin"
+              className="text-blue-600 dark:text-blue-400 hover:underline">
               панель администратора (/admin)
             </Link>
           </li>
@@ -103,20 +106,18 @@ export default async function Home() {
           <Link
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
             href="/admin"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             Админ панель
           </Link>
           <Link
             className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
             href="https://payloadcms.com/docs"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             Payload Docs
           </Link>
         </div>
       </main>
     </div>
-  );
+  )
 }
