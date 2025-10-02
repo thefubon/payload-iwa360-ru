@@ -75,12 +75,9 @@ export default buildConfig({
     vercelBlobStorage({
       enabled: true,
       collections: {
-        media: {
-          disableLocalStorage: true, // Отключить локальное хранение
-          prefix: 'media', // Префикс для файлов в Blob
-        },
+        media: true,
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN!,
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
 })
