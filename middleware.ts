@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export const config = {
   // Защищаем ТОЛЬКО админку Payload
   // НЕ блокируем API endpoints и фронтенд!
-  matcher: ['/:path*', '/index/:path*', '/admin/:path*'],
+  matcher: ['/admin/:path*'],
 }
 
 export function middleware(req: NextRequest) {
