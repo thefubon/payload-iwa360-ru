@@ -5,6 +5,11 @@ export interface PageData {
   title: string
   slug: string
   description: string
+  layout?: Array<{
+    blockType: string
+    id?: string
+    [key: string]: any
+  }>
   createdAt: string
   updatedAt: string
 }

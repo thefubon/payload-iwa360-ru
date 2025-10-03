@@ -1,6 +1,79 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Подключение кастомного шрифта GuarujaNeue */
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'GuarujaNeue';
+  src: url('/fonts/GuarujaNeue-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -118,5 +191,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Применение кастомного шрифта GuarujaNeue для всех заголовков */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
   }
 }

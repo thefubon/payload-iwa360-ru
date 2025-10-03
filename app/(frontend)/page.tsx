@@ -106,6 +106,7 @@ export default async function Home() {
                 <li key={page.id}>
                   <Link
                     href={`/${page.slug}`}
+                    scroll={true}
                     className="block p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
                     <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-1">
                       {page.title}
