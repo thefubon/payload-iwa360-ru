@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -16,6 +17,28 @@ import type { HeaderProps, ListItemProps } from '@/types/components'
 import { cn } from '@/lib/utils'
 
 export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
+  const pathname = usePathname()
+
+  // Нормализация URL - добавляет "/" в начало, если его нет
+  const normalizeUrl = (url: string) => {
+    if (!url) return '#'
+    // Если URL начинается с http/https, возвращаем как есть
+    if (url.startsWith('http://') || url.startsWith('https://')) return url
+    // Добавляем "/" в начало, если его нет
+    return url.startsWith('/') ? url : `/${url}`
+  }
+
+  // Проверка активности ссылки
+  const isActive = (url: string) => {
+    const normalizedUrl = normalizeUrl(url)
+    return pathname === normalizedUrl
+  }
+
+  // Проверка активности выпадающего меню (если любая из внутренних ссылок активна)
+  const isDropdownActive = (dropdownItems?: Array<{ url: string }>) => {
+    return dropdownItems?.some((item) => isActive(item.url)) || false
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,20 +67,28 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
               {mainMenu?.map((item, index) => (
                 <NavigationMenuItem key={index}>
                   {item.type === 'link' ? (
-                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                      <Link href={item.url || '#'}>{item.label}</Link>
+                    <NavigationMenuLink asChild className={cn(
+                      navigationMenuTriggerStyle(),
+                      isActive(item.url || '#') && 'bg-accent text-accent-foreground'
+                    )}>
+                      <Link href={normalizeUrl(item.url || '#')}>{item.label}</Link>
                     </NavigationMenuLink>
                   ) : (
                     <>
-                      <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={cn(
+                        isDropdownActive(item.dropdownItems) && 'bg-accent text-accent-foreground'
+                      )}>
+                        {item.label}
+                      </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {item.dropdownItems?.map((dropItem, dropIndex) => (
                             <ListItem
                               key={dropIndex}
                               title={dropItem.label}
-                              href={dropItem.url}
+                              href={normalizeUrl(dropItem.url)}
                               icon={dropItem.icon && typeof dropItem.icon === 'object' ? dropItem.icon : undefined}
+                              isActive={isActive(dropItem.url)}
                             >
                               {dropItem.description}
                             </ListItem>
@@ -114,14 +145,15 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
   )
 }
 
-function ListItem({ title, href, children, icon }: ListItemProps) {
+function ListItem({ title, href, children, icon, isActive }: ListItemProps & { isActive?: boolean }) {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           href={href}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+            isActive && 'bg-accent text-accent-foreground font-semibold'
           )}
         >
           <div className="flex items-start gap-3">
@@ -137,9 +169,17 @@ function ListItem({ title, href, children, icon }: ListItemProps) {
               </div>
             )}
             <div className="flex-1">
-              <div className="text-sm font-medium leading-none">{title}</div>
+              <div className={cn(
+                "text-sm font-medium leading-none",
+                isActive && "font-semibold"
+              )}>
+                {title}
+              </div>
               {children && (
-                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground mt-1">
+                <p className={cn(
+                  "line-clamp-2 text-sm leading-snug mt-1",
+                  isActive ? "text-accent-foreground/80" : "text-muted-foreground"
+                )}>
                   {children}
                 </p>
               )}

@@ -17,6 +17,13 @@ export default async function Home() {
   // Получаем информацию о логотипе, если он загружен
   const logo = settings.logo && typeof settings.logo === 'object' ? settings.logo : null;
 
+  // Получаем все страницы
+  const pagesResult = await payload.find({
+    collection: 'pages',
+    limit: 100,
+    sort: '-createdAt',
+  });
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -88,6 +95,31 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Список страниц */}
+        {pagesResult.docs.length > 0 && (
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 w-full max-w-2xl">
+            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+              📄 Страницы сайта:
+            </h2>
+            <ul className="space-y-3">
+              {pagesResult.docs.map((page: any) => (
+                <li key={page.id}>
+                  <Link
+                    href={`/${page.slug}`}
+                    className="block p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                    <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-1">
+                      {page.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
+                      {page.description}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Перейдите в{' '}
@@ -97,8 +129,11 @@ export default async function Home() {
               панель администратора (/admin)
             </Link>
           </li>
-          <li className="tracking-[-.01em]">
+          <li className="mb-2 tracking-[-.01em]">
             Откройте раздел &quot;Настройки сайта&quot; и заполните поля
+          </li>
+          <li className="tracking-[-.01em]">
+            Создавайте страницы в разделе &quot;Pages&quot;
           </li>
         </ol>
 

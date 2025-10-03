@@ -1,6 +1,7 @@
 // Типы для React компонентов (не связаны с Payload)
 
 import type { MediaType, MenuItemPayload, AuthMenuPayload } from './payload'
+import type { PageParams } from './pages'
 
 export interface HeaderProps {
   menuLogo?: MediaType
@@ -13,5 +14,9 @@ export interface ListItemProps {
   href: string
   children?: React.ReactNode
   icon?: MediaType
+}
+
+export interface PageComponentProps {
+  params: Promise<PageParams>
 }
 

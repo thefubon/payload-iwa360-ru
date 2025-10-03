@@ -7,6 +7,7 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 // Import collections
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 
 // Import globals
 import { Settings } from './globals/Settings'
@@ -19,7 +20,7 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Define and configure your collections in this array
-  collections: [Users, Media],
+  collections: [Users, Media, Pages],
 
   // Define global settings
   globals: [Settings],
