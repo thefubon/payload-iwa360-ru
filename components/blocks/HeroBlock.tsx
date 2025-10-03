@@ -34,11 +34,11 @@ export default function HeroBlock({
           
           {/* Слой 2: Градиент (адаптивный) */}
           <div
-            className="absolute inset-0 z-10 bg-gradient-to-br from-white/60 to-white/0 lg:bg-gradient-to-tl lg:from-white/75 lg:to-white/0"
+            className="absolute inset-0 z-10 bg-gradient-to-br from-white/60 to-white/0 lg:bg-gradient-to-tl lg:from-white/60 lg:to-white/0"
           />
 
           {/* Декоративная линия SVG */}
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 w-[110%] h-auto pointer-events-none lg:left-auto lg:right-0 lg:translate-x-0 lg:w-[65%] lg:-bottom-16">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 w-[110%] h-auto pointer-events-none lg:left-auto lg:-right-6 lg:translate-x-0 lg:w-[65%] lg:-bottom-16">
             <svg 
               viewBox="0 0 1196 795" 
               fill="none" 
