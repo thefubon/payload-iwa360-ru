@@ -40,4 +40,3 @@ export interface SettingsPayload {
   mainMenu?: MenuItemPayload[]
   authMenu?: AuthMenuPayload
 }
-
