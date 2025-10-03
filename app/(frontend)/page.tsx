@@ -102,7 +102,7 @@ export default async function Home() {
               📄 Страницы сайта:
             </h2>
             <ul className="space-y-3">
-              {pagesResult.docs.map((page: any) => (
+              {pagesResult.docs.map((page) => (
                 <li key={page.id}>
                   <Link
                     href={`/${page.slug}`}
