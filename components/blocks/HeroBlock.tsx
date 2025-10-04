@@ -48,23 +48,18 @@ export default function HeroBlock({
       ? Icons[button.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; style?: React.CSSProperties }>
       : null
 
+    // Создаем inline стиль для кастомного цвета текста
+    const customTextStyle = button.textColor ? {
+      color: button.textColor,
+    } : undefined
+
+    // Добавляем класс для переопределения цвета текста
+    const customColorClass = button.textColor ? '[&]:!text-[--custom-color]' : ''
+
     const buttonContent = (
       <>
-        <span 
-          style={button.textColor ? {
-            color: `${button.textColor} !important`,
-          } : undefined}
-        >
-          {button.text}
-        </span>
-        {IconComponent && (
-          <IconComponent 
-            className="w-5 h-5" 
-            style={button.textColor ? {
-              color: `${button.textColor} !important`,
-            } : undefined}
-          />
-        )}
+        <span>{button.text}</span>
+        {IconComponent && <IconComponent className="w-5 h-5" />}
       </>
     )
 
@@ -75,10 +70,8 @@ export default function HeroBlock({
           onClick={() => handleFormButtonClick(button)}
           variant={button.variant || 'default'}
           size="lg"
-          className="text-base px-8 py-6 w-full lg:w-auto"
-          style={button.textColor ? {
-            color: `${button.textColor} !important`,
-          } : undefined}
+          className={`text-base px-8 py-6 w-full lg:w-auto ${customColorClass}`}
+          style={button.textColor ? { ...customTextStyle, '--custom-color': button.textColor } as React.CSSProperties : undefined}
         >
           <span className="inline-flex items-center gap-2">
             {buttonContent}
@@ -93,15 +86,13 @@ export default function HeroBlock({
         asChild
         variant={button.variant || 'default'}
         size="lg"
-        className="text-base px-8 py-6 w-full lg:w-auto"
+        className={`text-base px-8 py-6 w-full lg:w-auto ${customColorClass}`}
+        style={button.textColor ? { ...customTextStyle, '--custom-color': button.textColor } as React.CSSProperties : undefined}
       >
         <Link 
           href={button.url || '#'} 
           scroll={true} 
           className="inline-flex items-center gap-2"
-          style={button.textColor ? {
-            color: `${button.textColor} !important`,
-          } : undefined}
         >
           {buttonContent}
         </Link>
