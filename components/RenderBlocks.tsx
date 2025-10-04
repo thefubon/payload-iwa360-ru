@@ -22,6 +22,7 @@ export default function RenderBlocks({ blocks }: RenderBlocksProps) {
                 backgroundColor={heroBlock.backgroundColor}
                 textColor={heroBlock.textColor}
                 title={heroBlock.title}
+                badges={heroBlock.badges}
                 description={heroBlock.description}
                 image={heroBlock.image}
                 button={heroBlock.button}

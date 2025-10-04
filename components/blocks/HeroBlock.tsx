@@ -1,13 +1,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import type { HeroBlockProps } from '@/types/blocks'
+import type { HeroBlockProps, Badge } from '@/types/blocks'
 import * as Icons from 'lucide-react'
+
+// SVG иконки для бейджей
+const BadgeIcons = {
+  meetings: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path opacity="0.5" d="M2.00012 11.5C2.00012 8.21252 2.00012 6.56878 2.90808 5.46243C3.0743 5.25989 3.26001 5.07418 3.46255 4.90796C4.5689 4 6.21264 4 9.50012 4C12.7876 4 14.4313 4 15.5377 4.90796C15.7402 5.07418 15.9259 5.25989 16.0921 5.46243C17.0001 6.56878 17.0001 8.21252 17.0001 11.5V12.5C17.0001 15.7875 17.0001 17.4312 16.0921 18.5376C15.9259 18.7401 15.7402 18.9258 15.5377 19.092C14.4313 20 12.7876 20 9.50012 20C6.21264 20 4.5689 20 3.46255 19.092C3.26001 18.9258 3.0743 18.7401 2.90808 18.5376C2.00012 17.4312 2.00012 15.7875 2.00012 12.5V11.5Z" fill="currentColor"/>
+      <path d="M17.0001 9.50019L17.6585 9.17101C19.6043 8.19807 20.5773 7.7116 21.2887 8.15127C22.0001 8.59094 22.0001 9.67872 22.0001 11.8543V12.1461C22.0001 14.3217 22.0001 15.4094 21.2887 15.8491C20.5773 16.2888 19.6043 15.8023 17.6585 14.8294L17.0001 14.5002V9.50019Z" fill="currentColor"/>
+    </svg>
+  ),
+  none: null,
+}
 
 export default function HeroBlock({
   backgroundColor = '#ffffff',
   textColor = 'foreground',
   title,
+  badges = [],
   description,
   image,
   button,
@@ -65,6 +77,34 @@ export default function HeroBlock({
                   className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${textColorClasses}`}
                   dangerouslySetInnerHTML={{ __html: title }}
                 />
+                
+                {/* Бейджи */}
+                {badges && badges.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {badges.map((badge, index) => {
+                      const icon = BadgeIcons[badge.icon as keyof typeof BadgeIcons]
+                      const opacity = badge.isActive !== false ? 'opacity-100' : 'opacity-50'
+                      
+                      return (
+                        <span
+                          key={badge.id || index}
+                          className={`inline-flex items-center gap-1.5 px-2 py-1.5 lg:gap-1.5 lg:px-3 lg:py-1.5 rounded-full text-xs lg:text-sm font-medium transition-opacity ${opacity}`}
+                          style={{
+                            backgroundColor: badge.bgColor,
+                            color: badge.textColor,
+                          }}
+                        >
+                          {icon && (
+                            <span className="flex-shrink-0 size-4" style={{ color: badge.textColor }}>
+                              {icon}
+                            </span>
+                          )}
+                          <span>{badge.label}</span>
+                        </span>
+                      )
+                    })}
+                  </div>
+                )}
                 
                 <p 
                   className={`text-lg md:text-xl leading-relaxed ${textColorClasses}`}

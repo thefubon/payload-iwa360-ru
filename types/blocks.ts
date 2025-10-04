@@ -2,11 +2,22 @@
 
 import type { MediaType } from './payload'
 
+// Тип для бейджа
+export interface Badge {
+  label: string
+  icon: string
+  bgColor: string
+  textColor: string
+  isActive?: boolean
+  id?: string
+}
+
 // Пропсы для компонента HeroBlock
 export interface HeroBlockProps {
   backgroundColor?: string
   textColor?: 'foreground' | 'background'
   title: string
+  badges?: Badge[]
   description: string
   image: MediaType
   button: {
@@ -26,6 +37,7 @@ export interface HeroBlockData {
   backgroundColor?: string
   textColor?: 'foreground' | 'background'
   title: string
+  badges?: Badge[]
   description: string
   image: MediaType
   button: {
