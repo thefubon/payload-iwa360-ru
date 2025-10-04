@@ -19,17 +19,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Получаем форму из базы данных
-    const form = await payload.findByID({
+    const formResult = await payload.findByID({
       collection: 'forms',
       id: formId,
     })
 
-    if (!form) {
+    if (!formResult) {
       return NextResponse.json(
         { error: 'Form not found' },
         { status: 404 }
       )
     }
+
+    // Приводим к типу ApiFormData
+    const form = formResult as unknown as ApiFormData
 
     // Валидация полей формы
     const errors: Record<string, string> = {}
@@ -127,7 +130,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Вспомогательная функция для поиска email пользователя в данных формы
-function findUserEmail(fields: ApiFormField[], data: Record<string, string>): string | null {
+function findUserEmail(fields: ApiFormField[] | undefined, data: Record<string, string>): string | null {
   const emailField = fields?.find((field) => field.fieldType === 'email')
   return emailField ? data[emailField.name] : null
 }

@@ -13,7 +13,7 @@ export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps)
       {blocks.map((block, index) => {
         switch (block.blockType) {
           case 'hero':
-            const heroBlock = block as HeroBlockData
+            const heroBlock = block as unknown as HeroBlockData
             return (
               <HeroBlock
                 key={block.id || index}
@@ -28,7 +28,7 @@ export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps)
               />
             )
           case 'form':
-            const formBlock = block as FormBlockData
+            const formBlock = block as unknown as FormBlockData
             // Проверяем, является ли form объектом или ID
             const formData = typeof formBlock.form === 'object' ? formBlock.form : null
             if (!formData) {
