@@ -9,6 +9,7 @@ export interface Badge {
   bgColor: string
   textColor: string
   isActive?: boolean
+  isBeta?: boolean
   id?: string
 }
 
@@ -24,7 +25,6 @@ export interface HeroBlockProps {
     text: string
     url: string
     variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-    customColor?: string
     textColor?: string
     icon?: string
   }
@@ -44,7 +44,6 @@ export interface HeroBlockData {
     text: string
     url: string
     variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-    customColor?: string
     textColor?: string
     icon?: string
   }

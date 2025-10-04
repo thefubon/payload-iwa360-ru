@@ -124,8 +124,8 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.654 0.127 171.3);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -158,8 +158,8 @@
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
+  --primary: oklch(0.654 0.127 171.3);
+  --primary-foreground: oklch(0.129 0.042 264.695);
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
@@ -193,8 +193,39 @@
     @apply bg-background text-foreground;
   }
   
-  /* Применение кастомного шрифта GuarujaNeue для всех заголовков */
-  h1, h2, h3, h4, h5, h6 {
+  /* H1 - Главный заголовок */
+  h1 {
     font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-normal;
+  }
+  
+  /* H2 - Подзаголовок секции */
+  h2 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-normal;
+  }
+  
+  /* H3 - Заголовок блока */
+  h3 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug tracking-normal;
+  }
+  
+  /* H4 - Подзаголовок блока */
+  h4 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-xl sm:text-2xl lg:text-3xl font-semibold leading-snug tracking-normal;
+  }
+  
+  /* H5 - Малый заголовок */
+  h5 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-lg sm:text-xl lg:text-2xl font-semibold leading-normal tracking-normal;
+  }
+  
+  /* H6 - Самый маленький заголовок */
+  h6 {
+    font-family: 'GuarujaNeue', ui-sans-serif, system-ui, sans-serif;
+    @apply text-base sm:text-lg lg:text-xl font-semibold leading-normal tracking-normal;
   }
 }
