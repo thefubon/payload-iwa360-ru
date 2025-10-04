@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     // Валидация полей формы
     const errors: Record<string, string> = {}
     
-    form.fields?.forEach((field) => {
+    form.fields?.forEach((field: ApiFormField) => {
       if (field.required && (!data[field.name] || data[field.name].trim() === '')) {
         errors[field.name] = `Поле "${field.label}" обязательно для заполнения`
       }
@@ -143,7 +143,7 @@ async function sendAdminEmail(form: ApiFormData, data: Record<string, string>) {
       <table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
   `
   
-  form.fields?.forEach((field) => {
+  form.fields?.forEach((field: ApiFormField) => {
     const value = data[field.name] || '-'
     emailHtml += `
       <tr style="border-bottom: 1px solid #eee;">
