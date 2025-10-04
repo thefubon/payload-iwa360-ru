@@ -1,7 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import type { HeroBlockProps, Badge } from '@/types/blocks'
+import FormModal from '@/components/FormModal'
+import type { HeroBlockProps, HeroButton, FormData } from '@/types/blocks'
 import * as Icons from 'lucide-react'
 import { ProductIcon, type ProductIconType } from '@/components/icons'
 
@@ -12,17 +16,98 @@ export default function HeroBlock({
   badges = [],
   description,
   image,
-  button,
+  buttons = [],
+  consentText,
 }: HeroBlockProps) {
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedForm, setSelectedForm] = useState<{
+    formData: FormData
+    modalTitle?: string
+    modalDescription?: string
+  } | null>(null)
+
   // Определяем классы цвета текста
   const textColorClasses = textColor === 'background' 
     ? 'text-background dark:text-background' 
     : 'text-foreground dark:text-foreground'
-  
-  // Получаем компонент иконки из lucide-react
-  const IconComponent = button.icon && button.icon in Icons 
-    ? Icons[button.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-    : null
+
+  const handleFormButtonClick = (button: HeroButton) => {
+    if (button.buttonType === 'form' && button.form && typeof button.form === 'object') {
+      setSelectedForm({
+        formData: button.form as FormData,
+        modalTitle: button.modalTitle,
+        modalDescription: button.modalDescription,
+      })
+      setModalOpen(true)
+    }
+  }
+
+  const renderButton = (button: HeroButton, index: number) => {
+    // Получаем компонент иконки из lucide-react
+    const IconComponent = button.icon && button.icon in Icons 
+      ? Icons[button.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+      : null
+
+    const buttonContent = (
+      <>
+        <span 
+          style={button.textColor ? {
+            color: `${button.textColor} !important`,
+          } : undefined}
+        >
+          {button.text}
+        </span>
+        {IconComponent && (
+          <IconComponent 
+            className="w-5 h-5" 
+            style={button.textColor ? {
+              color: `${button.textColor} !important`,
+            } : undefined}
+          />
+        )}
+      </>
+    )
+
+    if (button.buttonType === 'form') {
+      return (
+        <Button
+          key={button.id || index}
+          onClick={() => handleFormButtonClick(button)}
+          variant={button.variant || 'default'}
+          size="lg"
+          className="text-base px-8 py-6 w-full lg:w-auto"
+          style={button.textColor ? {
+            color: `${button.textColor} !important`,
+          } : undefined}
+        >
+          <span className="inline-flex items-center gap-2">
+            {buttonContent}
+          </span>
+        </Button>
+      )
+    }
+
+    return (
+      <Button
+        key={button.id || index}
+        asChild
+        variant={button.variant || 'default'}
+        size="lg"
+        className="text-base px-8 py-6 w-full lg:w-auto"
+      >
+        <Link 
+          href={button.url || '#'} 
+          scroll={true} 
+          className="inline-flex items-center gap-2"
+          style={button.textColor ? {
+            color: `${button.textColor} !important`,
+          } : undefined}
+        >
+          {buttonContent}
+        </Link>
+      </Button>
+    )
+  }
   
   return (
     <section className="py-4">
@@ -101,40 +186,12 @@ export default function HeroBlock({
                   dangerouslySetInnerHTML={{ __html: description }}
                 />
 
-                {/* Кнопка */}
-                <div className="pt-2 flex justify-start w-full">
-                  <Button
-                    asChild
-                    variant={button.variant || 'default'}
-                    size="lg"
-                    className="text-base px-8 py-6 w-full lg:w-auto"
-                  >
-                    <Link 
-                      href={button.url} 
-                      scroll={true} 
-                      className="inline-flex items-center gap-2"
-                      style={button.textColor ? {
-                        color: `${button.textColor} !important`,
-                      } : undefined}
-                    >
-                      <span 
-                        style={button.textColor ? {
-                          color: `${button.textColor} !important`,
-                        } : undefined}
-                      >
-                        {button.text}
-                      </span>
-                      {IconComponent && (
-                        <IconComponent 
-                          className="w-5 h-5" 
-                          style={button.textColor ? {
-                            color: `${button.textColor} !important`,
-                          } : undefined}
-                        />
-                      )}
-                    </Link>
-                  </Button>
-                </div>
+                {/* Кнопки */}
+                {buttons && buttons.length > 0 && (
+                  <div className="pt-2 flex flex-col lg:flex-row gap-4 justify-start w-full">
+                    {buttons.map((button, index) => renderButton(button, index))}
+                  </div>
+                )}
               </div>
 
               {/* Картинка */}
@@ -153,6 +210,18 @@ export default function HeroBlock({
           </div>
         </div>
       </div>
+
+      {/* Модальное окно с формой */}
+      {selectedForm && (
+        <FormModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          modalTitle={selectedForm.modalTitle}
+          modalDescription={selectedForm.modalDescription}
+          formData={selectedForm.formData}
+          consentText={consentText}
+        />
+      )}
     </section>
   )
 }

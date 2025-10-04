@@ -8,7 +8,7 @@ export interface PageData {
   layout?: Array<{
     blockType: string
     id?: string
-    [key: string]: any
+    [key: string]: unknown
   }>
   createdAt: string
   updatedAt: string

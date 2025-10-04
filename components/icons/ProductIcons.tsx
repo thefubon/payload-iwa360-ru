@@ -1,20 +1,7 @@
 import React from 'react'
+import type { ProductIconType, ProductIconProps } from '@/types/components'
 
-export type ProductIconType = 
-  | 'meetings' 
-  | 'webinars' 
-  | 'streams' 
-  | 'messenger' 
-  | 'mail' 
-  | 'disk' 
-  | 'ai' 
-  | 'none'
-
-interface ProductIconProps {
-  icon: ProductIconType
-  className?: string
-  size?: number
-}
+export type { ProductIconType }
 
 export const ProductIcons: Record<ProductIconType, React.ReactNode | null> = {
   meetings: (

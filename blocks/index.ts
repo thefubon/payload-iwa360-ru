@@ -1,6 +1,7 @@
 // Экспорт всех блоков для конструктора страниц
 
 export { Hero } from './Hero'
+export { FormBlock } from './FormBlock'
 
 // В будущем можно добавить:
 // export { Features } from './Features'

@@ -13,6 +13,20 @@ export interface Badge {
   id?: string
 }
 
+// Типы для кнопок Hero блока
+export interface HeroButton {
+  id?: string
+  buttonType: 'link' | 'form'
+  text: string
+  url?: string
+  form?: string | FormData
+  modalTitle?: string
+  modalDescription?: string
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  textColor?: string
+  icon?: string
+}
+
 // Пропсы для компонента HeroBlock
 export interface HeroBlockProps {
   backgroundColor?: string
@@ -21,13 +35,8 @@ export interface HeroBlockProps {
   badges?: Badge[]
   description: string
   image: MediaType
-  button: {
-    text: string
-    url: string
-    variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-    textColor?: string
-    icon?: string
-  }
+  buttons?: HeroButton[]
+  consentText?: string
 }
 
 // Данные Hero блока из Payload CMS
@@ -40,19 +49,50 @@ export interface HeroBlockData {
   badges?: Badge[]
   description: string
   image: MediaType
-  button: {
-    text: string
-    url: string
-    variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-    textColor?: string
-    icon?: string
-  }
+  buttons?: HeroButton[]
+  consentText?: string
+}
+
+// Типы для FormBlock
+export interface FormField {
+  id: string
+  name: string
+  label: string
+  fieldType: string
+  placeholder?: string
+  required?: boolean
+  options?: string
+  icon?: string
+  width?: 'full' | 'half'
+}
+
+export interface FormData {
+  id: string
+  title: string
+  fields: FormField[]
+  submitButtonText: string
+  emailTo: string
+  emailSubject?: string
+  sendEmailToUser?: boolean
+  userEmailSubject?: string
+  successTitle: string
+  successMessage: string
+  showSuccessIcon: boolean
+}
+
+export interface FormBlockData {
+  blockType: 'form'
+  id?: string
+  backgroundColor?: string
+  title?: string
+  description?: string
+  form: string | FormData
 }
 
 // Базовый тип для любого блока
 export interface BlockType {
   blockType: string
   id?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 

@@ -1,4 +1,4 @@
-# Payload IVA360 RU
+# Payload IWA360 RU
 
 Проект на базе **Payload CMS 3.58** + **Next.js 15** + **PostgreSQL (Neon)** + **Vercel Blob Storage**
 
@@ -458,4 +458,4 @@ export default buildConfig({
 
 ---
 
-Создано с ❤️ для IVA360
+Создано с ❤️ для IWA360

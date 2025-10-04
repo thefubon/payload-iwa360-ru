@@ -56,13 +56,13 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
                   priority
                 />
               ) : (
-                <span className="text-xl font-bold text-gray-900">IVA360</span>
+                <span className="text-xl font-bold text-gray-900">IWA360</span>
               )}
             </Link>
           </div>
 
           {/* Главное меню */}
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden md:flex" viewport={true}>
             <NavigationMenuList>
               {mainMenu?.map((item, index) => (
                 <NavigationMenuItem key={index}>
@@ -81,7 +81,7 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
                         {item.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {item.dropdownItems?.map((dropItem, dropIndex) => (
                             <ListItem
                               key={dropIndex}

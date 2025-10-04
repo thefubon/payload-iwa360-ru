@@ -3,6 +3,9 @@ import "@/styles/globals.css";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
+import { Toaster } from "@/components/ui/sonner";
 import type { SettingsPayload } from "@/types/payload";
 
 export const metadata: Metadata = {
@@ -54,13 +57,24 @@ export default async function RootLayout({
 
   return (
     <html lang="ru">
-      <body className="antialiased">
+      <body className="antialiased flex flex-col min-h-screen">
         <Header 
           menuLogo={menuLogo}
           mainMenu={mainMenu}
           authMenu={settings.authMenu}
         />
-        {children}
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <CookieBanner
+          enabled={settings.cookieBanner?.enabled}
+          title={settings.cookieBanner?.title}
+          description={settings.cookieBanner?.description}
+          acceptButtonText={settings.cookieBanner?.acceptButtonText}
+          policyLinkText={settings.cookieBanner?.policyLinkText}
+        />
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

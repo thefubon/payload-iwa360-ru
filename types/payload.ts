@@ -39,4 +39,16 @@ export interface SettingsPayload {
   menuLogo?: string | MediaType
   mainMenu?: MenuItemPayload[]
   authMenu?: AuthMenuPayload
+  cookieBanner?: {
+    enabled?: boolean
+    title?: string
+    description?: string
+    acceptButtonText?: string
+    policyLinkText?: string
+  }
+  formConsent?: {
+    text?: string
+    privacyPolicyText?: string
+    personalDataText?: string
+  }
 }

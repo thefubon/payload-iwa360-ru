@@ -8,6 +8,8 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Forms } from './collections/Forms'
+import { FormSubmissions } from './collections/FormSubmissions'
 
 // Import globals
 import { Settings } from './globals/Settings'
@@ -20,7 +22,7 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Define and configure your collections in this array
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, Forms, FormSubmissions],
 
   // Define global settings
   globals: [Settings],
@@ -43,7 +45,7 @@ export default buildConfig({
   // Admin panel configuration
   admin: {
     meta: {
-      titleSuffix: '- IVA360',
+      titleSuffix: '- IWA360',
     },
     // Можно добавить свой логотип
     // components: {

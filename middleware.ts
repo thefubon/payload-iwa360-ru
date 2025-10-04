@@ -13,7 +13,6 @@ export function middleware(req: NextRequest) {
   }
 
   const basicAuth = req.headers.get('Authorization')
-  const url = req.nextUrl
 
   // Проверяем что переменные окружения заданы
   const validUser = process.env.BASIC_AUTH_USER

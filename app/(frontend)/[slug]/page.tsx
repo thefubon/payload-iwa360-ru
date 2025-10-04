@@ -27,7 +27,7 @@ export default async function Page({ params }: PageComponentProps) {
   const { slug } = await params
   const payload = await getPayload({ config })
 
-  // Получаем страницу по slug
+  // Получаем страницу по slug с полной загрузкой связанных данных
   const result = await payload.find({
     collection: 'pages',
     where: {
@@ -36,6 +36,7 @@ export default async function Page({ params }: PageComponentProps) {
       },
     },
     limit: 1,
+    depth: 3, // Загружаем связанные данные (формы в кнопках, медиа и т.д.)
   }) as PageResult
 
   const page = result.docs[0]
@@ -45,11 +46,18 @@ export default async function Page({ params }: PageComponentProps) {
     notFound()
   }
 
+  // Получаем настройки для текста согласия
+  const settings = await payload.findGlobal({
+    slug: 'settings',
+  })
+
+  const consentText = settings.formConsent?.text || 'Нажимая на кнопку отправить, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности.'
+
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Рендерим блоки конструктора страниц */}
       {page.layout && page.layout.length > 0 ? (
-        <RenderBlocks blocks={page.layout} />
+        <RenderBlocks blocks={page.layout} consentText={consentText} />
       ) : (
         // Fallback: если блоков нет, показываем старую версию
         <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">

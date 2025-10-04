@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload'
 import { Hero } from '../blocks/Hero'
+import { FormBlock } from '../blocks/FormBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -54,7 +55,7 @@ export const Pages: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       label: 'Контент страницы',
-      blocks: [Hero],
+      blocks: [Hero, FormBlock],
       admin: {
         initCollapsed: true,
       },

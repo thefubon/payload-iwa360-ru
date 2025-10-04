@@ -97,7 +97,7 @@ export const Hero: Block = {
       },
       admin: {
         description: 'Настройте бейджи для Hero блока. Порядок можно менять перетаскиванием.',
-        initCollapsed: true,
+        initCollapsed: false,
       },
       fields: [
         {
@@ -266,10 +266,34 @@ export const Hero: Block = {
       required: true,
     },
     {
-      name: 'button',
-      type: 'group',
-      label: 'Кнопка',
+      name: 'buttons',
+      type: 'array',
+      label: 'Кнопки',
+      minRows: 0,
+      maxRows: 2,
+      labels: {
+        singular: 'Кнопка',
+        plural: 'Кнопки',
+      },
+      admin: {
+        description: 'Добавьте до 2 кнопок. На десктопе они будут рядом, на мобильных - друг под другом',
+        initCollapsed: false,
+      },
       fields: [
+        {
+          name: 'buttonType',
+          type: 'select',
+          label: 'Тип кнопки',
+          required: true,
+          defaultValue: 'link',
+          options: [
+            { label: 'Просто кнопка (ссылка)', value: 'link' },
+            { label: 'Кнопка с формой', value: 'form' },
+          ],
+          admin: {
+            description: 'Выберите тип действия кнопки',
+          },
+        },
         {
           name: 'text',
           type: 'text',
@@ -281,8 +305,38 @@ export const Hero: Block = {
           name: 'url',
           type: 'text',
           label: 'Ссылка',
-          required: true,
-          defaultValue: '#',
+          admin: {
+            description: 'URL для перехода',
+            condition: (data, siblingData) => siblingData?.buttonType === 'link',
+          },
+        },
+        {
+          name: 'form',
+          type: 'relationship',
+          relationTo: 'forms',
+          label: 'Выберите форму',
+          admin: {
+            description: 'Форма, которая откроется в модальном окне при нажатии',
+            condition: (data, siblingData) => siblingData?.buttonType === 'form',
+          },
+        },
+        {
+          name: 'modalTitle',
+          type: 'text',
+          label: 'Заголовок модального окна',
+          admin: {
+            description: 'Заголовок для модального окна с формой',
+            condition: (data, siblingData) => siblingData?.buttonType === 'form',
+          },
+        },
+        {
+          name: 'modalDescription',
+          type: 'textarea',
+          label: 'Описание в модальном окне',
+          admin: {
+            description: 'Текст описания, который будет отображаться над формой в модальном окне',
+            condition: (data, siblingData) => siblingData?.buttonType === 'form',
+          },
         },
         {
           name: 'variant',
