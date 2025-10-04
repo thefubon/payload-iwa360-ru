@@ -1,159 +1,197 @@
-import Image from "next/image";
-import { getPayload } from "payload";
-import config from "@/payload.config";
-import Link from "next/link";
+import { Sparkles, Bot, Wifi, Camera } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
 
-// Отключаем кэширование страницы для получения актуальных данных из Settings
-export const revalidate = 0;
-
-export default async function Home() {
-  const payload = await getPayload({ config });
-  
-  // Получаем глобальные настройки
-  const settings = await payload.findGlobal({
-    slug: 'settings',
-  });
-
-  // Получаем информацию о логотипе, если он загружен
-  const logo = settings.logo && typeof settings.logo === 'object' ? settings.logo : null;
-
-  // Получаем все страницы
-  const pagesResult = await payload.find({
-    collection: 'pages',
-    limit: 100,
-    sort: '-createdAt',
-  });
-
+export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        {/* Выводим логотип из настроек, если он есть */}
-        {logo && logo.url ? (
-          <div style={{ width: 180, height: 'auto' }}>
-            <Image
-              className="dark:invert"
-              src={logo.url}
-              alt={logo.alt || 'Logo'}
-              width={logo.width || 180}
-              height={logo.height || 38}
-              priority
-              style={{ width: '100%', height: 'auto' }}
-            />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 pt-20 pb-16">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
+            <Sparkles className="w-4 h-4" />
+            <span className="text-sm font-medium">Цифровая платформа онлайн-коммуникаций</span>
           </div>
-        ) : (
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
-        )}
-
-        {/* Блок с данными из Settings */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 p-6 rounded-lg border border-blue-200 dark:border-blue-800 w-full max-w-2xl">
-          <h2 className="text-2xl font-bold mb-4 text-blue-900 dark:text-blue-100">
-            Данные из Payload Settings:
-          </h2>
-
-          <div className="space-y-3">
-            <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-sm">
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold mb-1">
-                Заголовок (Title):
-              </p>
-              <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {settings.title || 'Не установлен'}
-              </p>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-sm">
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold mb-1">
-                Описание (Description):
-              </p>
-              <p className="text-gray-900 dark:text-gray-100">
-                {settings.description || 'Не установлено'}
-              </p>
-            </div>
-
-            {logo && (
-              <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-sm">
-                <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold mb-2">
-                  Логотип:
-                </p>
-                <Image
-                  src={logo.url}
-                  alt={logo.alt || 'Logo'}
-                  width={logo.width || 200}
-                  height={logo.height || 100}
-                  className="rounded border border-gray-200 dark:border-gray-700"
-                  style={{ width: 'auto', height: 'auto', maxWidth: '200px' }}
-                  priority
-                />
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Список страниц */}
-        {pagesResult.docs.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 w-full max-w-2xl">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-              📄 Страницы сайта:
-            </h2>
-            <ul className="space-y-3">
-              {pagesResult.docs.map((page) => (
-                <li key={page.id}>
-                  <Link
-                    href={`/${page.slug}`}
-                    scroll={true}
-                    className="block p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
-                    <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-1">
-                      {page.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
-                      {page.description}
-                    </p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Перейдите в{' '}
+          
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            Все для вашей работы в{" "}
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              едином
+            </span>
+            {" "}пространстве
+          </h1>
+          
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Встречи, мессенджер, вебинары, трансляции, ИИ-ассистент, почта и календарь — продуктовая экосистема для корпоративных онлайн-коммуникаций
+          </p>
+          
+          <div className="flex flex-wrap gap-4 justify-center pt-6">
             <Link
-              href="/admin"
-              className="text-blue-600 dark:text-blue-400 hover:underline">
-              панель администратора (/admin)
+              href="#"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium text-lg">
+              <Sparkles className="w-5 h-5" />
+              Попробовать бесплатно
             </Link>
-          </li>
-          <li className="mb-2 tracking-[-.01em]">
-            Откройте раздел &quot;Настройки сайта&quot; и заполните поля
-          </li>
-          <li className="tracking-[-.01em]">
-            Создавайте страницы в разделе &quot;Pages&quot;
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="/admin"
-            rel="noopener noreferrer">
-            Админ панель
-          </Link>
-          <Link
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://payloadcms.com/docs"
-            target="_blank"
-            rel="noopener noreferrer">
-            Payload Docs
-          </Link>
+            <Link
+              href="#"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg border-2 border-primary text-primary hover:bg-primary/5 transition-colors font-medium text-lg">
+              Оставить заявку
+            </Link>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Images Section */}
+      <section className="w-full py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Все продукты в одном приложении
+          </h2>
+        </div>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Image 1 */}
+            <div className="relative h-[300px] md:h-[400px] lg:row-span-2 lg:h-auto rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-1.png"
+                alt="Product 1"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 2 */}
+            <div className="relative h-[200px] rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-2.jpg"
+                alt="Product 2"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 3 */}
+            <div className="relative h-[200px] rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-3.png"
+                alt="Product 3"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 4 */}
+            <div className="relative h-[300px] md:h-[400px] lg:row-span-2 lg:h-auto rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-4.jpg"
+                alt="Product 4"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 5 */}
+            <div className="relative h-[200px] rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-5.jpg"
+                alt="Product 5"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 6 */}
+            <div className="relative h-[200px] md:col-span-2 rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-6.jpg"
+                alt="Product 6"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 9 */}
+            <div className="relative h-[200px] rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-9.jpg"
+                alt="Product 9"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 7 */}
+            <div className="relative h-[200px] md:col-span-2 rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-7.jpg"
+                alt="Product 7"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Image 8 */}
+            <div className="relative h-[200px] rounded-2xl md:rounded-3xl overflow-hidden">
+              <Image
+                src="/img/demo-content/img-8.jpg"
+                alt="Product 8"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose IVA 360 Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Почему выбирают IVA 360
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+            <div className="p-6 rounded-xl border border-slate-200 hover:border-primary/50 transition-colors">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Bot className="w-6 h-6 text-primary" />
+              </div>
+              <h4 className="font-semibold mb-2">Искусственный интеллект внутри</h4>
+              <p className="text-sm text-muted-foreground">
+                Автоматические протоколы встреч, напоминания и поддержка задач — прямо во время работы
+              </p>
+            </div>
+            
+            <div className="p-6 rounded-xl border border-slate-200 hover:border-primary/50 transition-colors">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Wifi className="w-6 h-6 text-primary" />
+              </div>
+              <h4 className="font-semibold mb-2">Стабильная работа даже при слабом интернете</h4>
+              <p className="text-sm text-muted-foreground">
+                Оптимизированные технологии передачи данных обеспечивают устойчивую видеосвязь даже в удаленных регионах
+              </p>
+            </div>
+            
+            <div className="p-6 rounded-xl border border-slate-200 hover:border-primary/50 transition-colors">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <Camera className="w-6 h-6 text-primary" />
+              </div>
+              <h4 className="font-semibold mb-2">Совместимость с профессиональным оборудованием</h4>
+              <p className="text-sm text-muted-foreground">
+                Поддержка современных стандартов связи и интеграция с камерами и переговорными — для бизнеса любого масштаба
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

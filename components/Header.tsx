@@ -39,122 +39,187 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
     return dropdownItems?.some((item) => isActive(item.url)) || false
   }
 
+  // Получить активный пункт выпадающего меню
+  const getActiveDropdownItem = (dropdownItems?: Array<{ url: string; activeTextColor?: string; activeBorderColor?: string }>) => {
+    return dropdownItems?.find((item) => isActive(item.url))
+  }
+
+  // Получить цвет текста для активного пункта
+  const getActiveTextColor = (item: { url?: string; activeTextColor?: string }, dropdownItems?: Array<{ url: string; activeTextColor?: string; activeBorderColor?: string }>) => {
+    // Для обычной ссылки
+    if (item.url && isActive(item.url)) {
+      return item.activeTextColor || null
+    }
+    // Для выпадающего меню - проверяем активный элемент внутри
+    const activeDropdownItem = getActiveDropdownItem(dropdownItems)
+    if (activeDropdownItem) {
+      return activeDropdownItem.activeTextColor || null
+    }
+    return null
+  }
+
+  // Получить цвет бордера для активного пункта
+  const getActiveBorderColor = (item: { url?: string; activeBorderColor?: string }, dropdownItems?: Array<{ url: string; activeTextColor?: string; activeBorderColor?: string }>) => {
+    // Для обычной ссылки
+    if (item.url && isActive(item.url)) {
+      return item.activeBorderColor || null
+    }
+    // Для выпадающего меню - проверяем активный элемент внутри
+    const activeDropdownItem = getActiveDropdownItem(dropdownItems)
+    if (activeDropdownItem) {
+      return activeDropdownItem.activeBorderColor || null
+    }
+    return null
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Логотип */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              {menuLogo?.url ? (
-                <Image
-                  src={menuLogo.url}
-                  alt={menuLogo.alt || 'Logo'}
-                  width={menuLogo.width || 120}
-                  height={menuLogo.height || 40}
-                  className="h-10 w-auto"
-                  priority
-                />
-              ) : (
-                <span className="text-xl font-bold text-gray-900">IWA360</span>
-              )}
-            </Link>
-          </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="relative">
+          <div className="flex h-16 items-center justify-between">
+            {/* Логотип */}
+            <div className="flex-shrink-0">
+              <Link href="/" className="flex items-center">
+                {menuLogo?.url ? (
+                  <Image
+                    src={menuLogo.url}
+                    alt={menuLogo.alt || 'Logo'}
+                    width={menuLogo.width || 120}
+                    height={menuLogo.height || 40}
+                    className="h-10 w-auto"
+                    priority
+                  />
+                ) : (
+                  <span className="text-xl font-bold text-gray-900">IWA360</span>
+                )}
+              </Link>
+            </div>
 
-          {/* Главное меню */}
-          <NavigationMenu className="hidden md:flex" viewport={true}>
-            <NavigationMenuList>
-              {mainMenu?.map((item, index) => (
-                <NavigationMenuItem key={index}>
-                  {item.type === 'link' ? (
-                    <NavigationMenuLink asChild className={cn(
-                      navigationMenuTriggerStyle(),
-                      isActive(item.url || '#') && 'bg-accent text-accent-foreground'
-                    )}>
-                      <Link href={normalizeUrl(item.url || '#')}>{item.label}</Link>
-                    </NavigationMenuLink>
-                  ) : (
-                    <>
-                      <NavigationMenuTrigger className={cn(
-                        isDropdownActive(item.dropdownItems) && 'bg-accent text-accent-foreground'
-                      )}>
-                        {item.label}
-                      </NavigationMenuTrigger>
+            {/* Главное меню */}
+            <NavigationMenu className="hidden md:flex">
+              <NavigationMenuList>
+              {mainMenu?.map((item, index) => {
+                const isItemActive = item.type === 'link' ? isActive(item.url || '#') : isDropdownActive(item.dropdownItems)
+                const textColor = isItemActive ? getActiveTextColor(item, item.dropdownItems) : null
+                const borderColor = isItemActive ? getActiveBorderColor(item, item.dropdownItems) : null
+                
+                // Формируем стили если элемент активен
+                const activeStyles = isItemActive ? {
+                  color: textColor || undefined,
+                  '--border-color': borderColor || '#00B08B'
+                } as React.CSSProperties & { '--border-color'?: string } : undefined
+                
+                return (
+                  <NavigationMenuItem key={index}>
+                    {item.type === 'link' ? (
+                      <NavigationMenuLink 
+                        asChild 
+                        className={cn(
+                          navigationMenuTriggerStyle(),
+                          isItemActive && 'after:h-1',
+                          'hover:bg-transparent focus:bg-transparent hover:text-current focus:text-current'
+                        )}
+                        style={activeStyles}
+                      >
+                        <Link href={normalizeUrl(item.url || '#')}>{item.label}</Link>
+                      </NavigationMenuLink>
+                    ) : (
+                      <>
+                        <NavigationMenuTrigger 
+                          className={cn(
+                            isItemActive && 'after:h-1'
+                          )}
+                          style={activeStyles}
+                        >
+                          {item.label}
+                        </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                          {item.dropdownItems?.map((dropItem, dropIndex) => (
-                            <ListItem
-                              key={dropIndex}
-                              title={dropItem.label}
-                              href={normalizeUrl(dropItem.url)}
-                              icon={dropItem.icon && typeof dropItem.icon === 'object' ? dropItem.icon : undefined}
-                              isActive={isActive(dropItem.url)}
-                            >
-                              {dropItem.description}
-                            </ListItem>
-                          ))}
-                        </ul>
+                        <div className="container">
+                          <ul className={cn(
+                            "grid w-full gap-4 py-6",
+                            // Определяем количество колонок на основе количества элементов
+                            item.dropdownItems && item.dropdownItems.length === 1 && "md:grid-cols-1",
+                            item.dropdownItems && item.dropdownItems.length === 2 && "md:grid-cols-2",
+                            item.dropdownItems && item.dropdownItems.length === 3 && "md:grid-cols-3",
+                            item.dropdownItems && item.dropdownItems.length === 4 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+                            item.dropdownItems && item.dropdownItems.length === 5 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+                            item.dropdownItems && item.dropdownItems.length >= 6 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+                          )}>
+                            {item.dropdownItems?.map((dropItem, dropIndex) => (
+                              <ListItem
+                                key={dropIndex}
+                                title={dropItem.label}
+                                href={normalizeUrl(dropItem.url)}
+                                icon={dropItem.icon && typeof dropItem.icon === 'object' ? dropItem.icon : undefined}
+                                isActive={isActive(dropItem.url)}
+                                activeTextColor={dropItem.activeTextColor}
+                              >
+                                {dropItem.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </div>
                       </NavigationMenuContent>
-                    </>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+                      </>
+                    )}
+                  </NavigationMenuItem>
+                )
+              })}
+              </NavigationMenuList>
+            </NavigationMenu>
 
-          {/* Меню авторизации */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
-            {authMenu?.loginButton && (
-              <Button variant="ghost" asChild>
-                <Link href={authMenu.loginButton.url}>
-                  {authMenu.loginButton.label}
-                </Link>
-              </Button>
-            )}
-            {authMenu?.registerButton && (
-              <Button asChild>
-                <Link href={authMenu.registerButton.url}>
-                  {authMenu.registerButton.label}
-                </Link>
-              </Button>
-            )}
-          </div>
+            {/* Меню авторизации */}
+            <div className="hidden md:flex md:items-center md:space-x-4">
+              {authMenu?.loginButton && (
+                <Button variant="ghost" asChild>
+                  <Link href={authMenu.loginButton.url}>
+                    {authMenu.loginButton.label}
+                  </Link>
+                </Button>
+              )}
+              {authMenu?.registerButton && (
+                <Button asChild>
+                  <Link href={authMenu.registerButton.url}>
+                    {authMenu.registerButton.label}
+                  </Link>
+                </Button>
+              )}
+            </div>
 
-          {/* Мобильное меню (бургер) */}
-          <div className="flex md:hidden">
-            <Button variant="ghost" size="icon">
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-              <span className="sr-only">Открыть меню</span>
-            </Button>
+            {/* Мобильное меню (бургер) */}
+            <div className="flex md:hidden">
+              <Button variant="ghost" size="icon">
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+                <span className="sr-only">Открыть меню</span>
+              </Button>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   )
 }
 
-function ListItem({ title, href, children, icon, isActive }: ListItemProps & { isActive?: boolean }) {
+function ListItem({ title, href, children, icon, isActive, activeTextColor }: ListItemProps & { isActive?: boolean; activeTextColor?: string }) {
   return (
     <li>
       <NavigationMenuLink asChild>
-        <Link
-          href={href}
-          className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            isActive && 'bg-accent text-accent-foreground font-semibold'
-          )}
+        <Link 
+          href={href} 
+          className={cn('min-w-[200px]', isActive && 'font-semibold')}
+          style={isActive && activeTextColor ? { color: activeTextColor } : undefined}
         >
           <div className="flex items-start gap-3">
             {icon?.url && (
@@ -162,24 +227,21 @@ function ListItem({ title, href, children, icon, isActive }: ListItemProps & { i
                 <Image
                   src={icon.url}
                   alt={icon.alt || title}
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded object-cover"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-lg object-cover"
                 />
               </div>
             )}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className={cn(
-                "text-sm font-medium leading-none",
-                isActive && "font-semibold"
+                "text-sm font-semibold leading-tight mb-1",
+                isActive && "font-bold"
               )}>
                 {title}
               </div>
               {children && (
-                <p className={cn(
-                  "line-clamp-2 text-sm leading-snug mt-1",
-                  isActive ? "text-accent-foreground/80" : "text-muted-foreground"
-                )}>
+                <p className="text-muted-foreground line-clamp-2 text-xs leading-snug">
                   {children}
                 </p>
               )}

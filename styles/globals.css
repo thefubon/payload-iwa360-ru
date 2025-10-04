@@ -229,3 +229,7 @@
     @apply text-base sm:text-lg lg:text-xl font-medium leading-normal tracking-normal;
   }
 }
+
+@utility container {
+  @apply mx-auto px-4;
+}

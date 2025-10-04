@@ -12,12 +12,16 @@ export interface DropdownItemPayload {
   url: string
   icon?: string | MediaType
   description?: string
+  activeTextColor?: string
+  activeBorderColor?: string
 }
 
 export interface MenuItemPayload {
   type: 'link' | 'dropdown'
   label: string
   url?: string
+  activeTextColor?: string
+  activeBorderColor?: string
   dropdownItems?: DropdownItemPayload[]
 }
 

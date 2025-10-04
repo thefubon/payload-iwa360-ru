@@ -47,11 +47,15 @@ export default async function RootLayout({
     type: item.type,
     label: item.label,
     url: item.url,
+    activeTextColor: item.activeTextColor,
+    activeBorderColor: item.activeBorderColor,
     dropdownItems: item.dropdownItems?.map((dropItem) => ({
       label: dropItem.label,
       url: dropItem.url,
       icon: dropItem.icon && typeof dropItem.icon === 'object' ? dropItem.icon : undefined,
       description: dropItem.description,
+      activeTextColor: dropItem.activeTextColor,
+      activeBorderColor: dropItem.activeBorderColor,
     })),
   }));
 
