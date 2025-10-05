@@ -198,7 +198,7 @@ export default function HeroBlock({
                       return (
                         <span
                           key={badge.id || index}
-                          className={`inline-flex items-center gap-1.5 px-2 py-1.5 lg:gap-1.5 lg:px-3 lg:py-1.5 rounded-full text-xs lg:text-sm font-medium transition-opacity ${opacity}`}
+                          className={`inline-flex items-center gap-1.5 px-2 py-1.5 lg:gap-1.5 lg:px-3 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-opacity ${opacity}`}
                           style={{
                             backgroundColor: badge.bgColor,
                             color: badge.textColor,
