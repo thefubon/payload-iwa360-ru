@@ -3,7 +3,7 @@ import SearchPage from '@/components/SearchPage'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Поиск по сайту | IWA360',
+  title: 'Поиск по сайту',
   description: 'Найдите нужную информацию на нашем сайте',
   robots: 'noindex, nofollow', // Не индексируем страницу поиска
 }

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Согласие на обработку персональных данных | IWA360',
+  title: 'Согласие на обработку персональных данных',
   description: 'Согласие пользователя на обработку персональных данных в соответствии с ФЗ-152 "О персональных данных"',
   robots: {
     index: true,

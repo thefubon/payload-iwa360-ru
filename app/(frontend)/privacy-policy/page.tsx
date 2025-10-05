@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Политика конфиденциальности | IWA360',
+  title: 'Политика конфиденциальности',
   description: 'Политика конфиденциальности и обработки персональных данных IWA360',
   robots: {
     index: true,

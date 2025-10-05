@@ -5,9 +5,39 @@ import Link from 'next/link'
 import RenderBlocks from '@/components/RenderBlocks'
 import type { PageComponentProps } from '@/types/components'
 import type { PageResult, GenerateStaticParamsResult } from '@/types/pages'
+import type { Metadata } from 'next'
 
 // Отключаем кэширование для получения актуальных данных
 export const revalidate = 0
+
+// Генерация метаданных для SEO
+export async function generateMetadata({ params }: PageComponentProps): Promise<Metadata> {
+  const { slug } = await params
+  const payload = await getPayload({ config })
+
+  const result = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+  }) as PageResult
+
+  const page = result.docs[0]
+
+  if (!page) {
+    return {
+      title: 'Страница не найдена',
+    }
+  }
+
+  return {
+    title: page.title || page.slug,
+    description: page.description || '',
+  }
+}
 
 // Генерация статических путей для всех страниц
 export async function generateStaticParams(): Promise<GenerateStaticParamsResult[]> {

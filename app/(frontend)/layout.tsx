@@ -9,7 +9,10 @@ import { Toaster } from "@/components/ui/sonner";
 import type { SettingsPayload } from "@/types/payload";
 
 export const metadata: Metadata = {
-  title: "Payload | Blocks",
+  title: {
+    default: "IWA 360",
+    template: "%s | IWA 360",
+  },
   description: "Hello World!",
   robots: {
     index: false,
