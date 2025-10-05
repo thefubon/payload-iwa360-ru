@@ -17,6 +17,7 @@ import {
   InputGroupInput,
 } from '@/components/ui/input-group'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface SearchResult {
   id: string | number
@@ -148,9 +149,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 asChild
                 className="hidden sm:flex text-xs"
               >
-                <a href={query ? `/search?q=${encodeURIComponent(query)}` : '/search'} target="_blank">
+                <Link href={query ? `/search?q=${encodeURIComponent(query)}` : '/search'} target="_blank">
                   Открыть в новой вкладке
-                </a>
+                </Link>
               </Button>
               <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border bg-muted px-2 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                 <span className="text-xs">ESC</span>
