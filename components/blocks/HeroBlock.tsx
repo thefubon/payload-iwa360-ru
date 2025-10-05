@@ -166,6 +166,18 @@ export default function HeroBlock({
                             />
                           )}
                           <span>{badge.label}</span>
+                          {badge.isBeta && (
+                            <span 
+                              className="inline-flex items-center px-1.5 rounded-md text-[10px] lg:text-xs font-semibold border"
+                              style={{
+                                color: badge.textColor,
+                                borderColor: badge.textColor,
+                                backgroundColor: 'transparent',
+                              }}
+                            >
+                              Beta
+                            </span>
+                          )}
                         </span>
                       )
                     })}
