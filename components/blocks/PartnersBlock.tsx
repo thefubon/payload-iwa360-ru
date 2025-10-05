@@ -45,11 +45,11 @@ export default function PartnersBlock({
     const logoContent = (
       <div
         className={`
+          group
           relative flex-shrink-0 h-24 w-52 flex items-center justify-center px-8
           rounded-2xl
           transition-all duration-300
           ${showCardBackground ? 'bg-slate-100 hover:bg-white' : 'bg-transparent'}
-          ${grayscale ? 'grayscale opacity-60 hover:grayscale-0 hover:opacity-100' : 'opacity-80 hover:opacity-100'}
           hover:shadow-md
         `}
       >
@@ -58,7 +58,11 @@ export default function PartnersBlock({
           alt={logo.alt}
           width={160}
           height={64}
-          className="max-w-full max-h-full w-auto h-auto object-contain"
+          className={`
+            max-w-full max-h-full w-auto h-auto object-contain
+            transition-all duration-300
+            ${grayscale ? 'grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100' : 'opacity-80 group-hover:opacity-100'}
+          `}
           loading="lazy"
           unoptimized // Для избежания артефактов при анимации
         />
@@ -104,7 +108,19 @@ export default function PartnersBlock({
         </div>
 
         {/* Infinite scroll контейнер */}
-        <div className="relative w-full overflow-hidden py-2">
+        <div 
+          className="relative w-full overflow-hidden py-2"
+          onMouseEnter={() => {
+            if (scrollerRef.current) {
+              scrollerRef.current.style.animationPlayState = 'paused'
+            }
+          }}
+          onMouseLeave={() => {
+            if (scrollerRef.current) {
+              scrollerRef.current.style.animationPlayState = 'running'
+            }
+          }}
+        >
           
           {/* Анимированная лента логотипов */}
           <div 
@@ -113,16 +129,6 @@ export default function PartnersBlock({
             style={{
               animationDuration: `${getAnimationDuration()}s`,
               width: 'max-content',
-            }}
-            onMouseEnter={() => {
-              if (scrollerRef.current) {
-                scrollerRef.current.style.animationPlayState = 'paused'
-              }
-            }}
-            onMouseLeave={() => {
-              if (scrollerRef.current) {
-                scrollerRef.current.style.animationPlayState = 'running'
-              }
             }}
           >
             {duplicatedLogos.map((logo, index) => renderLogo(logo, index))}

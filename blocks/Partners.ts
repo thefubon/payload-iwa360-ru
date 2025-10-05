@@ -12,7 +12,7 @@ export const Partners: Block = {
       type: 'text',
       label: 'Заголовок',
       required: true,
-      defaultValue: 'Trusted by the largest Next.js companies.',
+      defaultValue: 'Заголовок над логотипами партнеров',
       admin: {
         description: 'Заголовок над логотипами партнеров',
       },

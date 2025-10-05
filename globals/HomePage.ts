@@ -14,40 +14,117 @@ export const HomePage: GlobalConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      label: 'Заголовок (Meta Title)',
-      required: true,
-      admin: {
-        description: 'SEO заголовок для главной страницы',
-      },
-    },
-    {
-      name: 'description',
-      type: 'textarea',
-      label: 'Описание (Meta Description)',
-      required: true,
-      admin: {
-        description: 'SEO описание для главной страницы',
-      },
-    },
-    {
-      name: 'showPageBackground',
-      type: 'checkbox',
-      label: 'Серый фон страницы',
-      defaultValue: false,
-      admin: {
-        description: 'Включить серый фон (Slate 100) для всей страницы',
-      },
-    },
-    {
-      name: 'layout',
-      type: 'blocks',
-      label: 'Контент страницы',
-      blocks: [Hero, FormBlock, Partners],
-      admin: {
-        initCollapsed: true,
-      },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Основное',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              label: 'Заголовок (Meta Title)',
+              required: true,
+              admin: {
+                description: 'SEO заголовок для главной страницы',
+              },
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание (Meta Description)',
+              required: true,
+              admin: {
+                description: 'SEO описание для главной страницы',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Контент страницы',
+          fields: [
+            {
+              name: 'layout',
+              type: 'blocks',
+              label: 'Блоки конструктора',
+              blocks: [Hero, FormBlock, Partners],
+              admin: {
+                initCollapsed: true,
+              },
+            },
+          ],
+        },
+        {
+          label: 'Настройки дизайна',
+          fields: [
+            {
+              name: 'showPageBackground',
+              type: 'checkbox',
+              label: 'Серый фон страницы',
+              defaultValue: false,
+              admin: {
+                description: 'Включить серый фон (Slate 100) для всей страницы',
+              },
+            },
+            {
+              name: 'showDecorativeLine',
+              type: 'checkbox',
+              label: 'Показать декоративную линию',
+              defaultValue: false,
+              admin: {
+                description: 'Включить декоративную линию на фоне страницы',
+              },
+            },
+            {
+              name: 'decorativeLineSettings',
+              type: 'group',
+              label: 'Настройки декоративной линии',
+              admin: {
+                condition: (data) => data?.showDecorativeLine === true,
+              },
+              fields: [
+                {
+                  name: 'topOffset',
+                  type: 'number',
+                  label: 'Отступ от шапки (px)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ сверху. Может быть отрицательным (например: -100 или 100)',
+                  },
+                },
+                {
+                  name: 'leftOffset',
+                  type: 'number',
+                  label: 'Отступ слева (px)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева. Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'rightOffset',
+                  type: 'number',
+                  label: 'Отступ справа (px)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа. Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'scale',
+                  type: 'number',
+                  label: 'Масштаб (%)',
+                  defaultValue: 100,
+                  min: 10,
+                  max: 500,
+                  admin: {
+                    description: 'Масштаб линии в процентах (100 = оригинальный размер)',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   ],
 }

@@ -67,9 +67,7 @@ export default async function RootLayout({
           mainMenu={mainMenu}
           authMenu={settings.authMenu}
         />
-        <main className="flex-1">
-          {children}
-        </main>
+        {children}
         <Footer />
         <CookieBanner
           enabled={settings.cookieBanner?.enabled}
