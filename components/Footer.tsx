@@ -15,6 +15,12 @@ export default function Footer() {
           {/* Ссылки на правила */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
             <Link
+              href="/search"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              🔍 Поиск
+            </Link>
+            <Link
               href="/privacy-policy"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >

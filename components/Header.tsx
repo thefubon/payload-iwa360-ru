@@ -1,8 +1,10 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -13,11 +15,26 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import SearchModal from '@/components/SearchModal'
 import type { HeaderProps, ListItemProps } from '@/types/components'
 import { cn } from '@/lib/utils'
 
 export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
   const pathname = usePathname()
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  // Горячая клавиша для открытия поиска (Ctrl/Cmd + K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsSearchOpen(true)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   // Нормализация URL - добавляет "/" в начало, если его нет
   const normalizeUrl = (url: string) => {
@@ -170,6 +187,17 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
 
             {/* Меню авторизации */}
             <div className="hidden md:flex md:items-center md:space-x-4">
+              {/* Иконка поиска */}
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setIsSearchOpen(true)}
+                aria-label="Поиск по сайту (Ctrl+K)"
+                title="Поиск по сайту (Ctrl+K)"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+              
               {authMenu?.loginButton && (
                 <Button variant="ghost" asChild>
                   <Link href={authMenu.loginButton.url}>
@@ -186,8 +214,19 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
               )}
             </div>
 
-            {/* Мобильное меню (бургер) */}
-            <div className="flex md:hidden">
+            {/* Мобильное меню */}
+            <div className="flex md:hidden gap-2">
+              {/* Иконка поиска для мобильных */}
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setIsSearchOpen(true)}
+                aria-label="Поиск по сайту"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+              
+              {/* Бургер меню */}
               <Button variant="ghost" size="icon">
                 <svg
                   className="h-6 w-6"
@@ -208,6 +247,9 @@ export default function Header({ menuLogo, mainMenu, authMenu }: HeaderProps) {
           </div>
         </nav>
       </div>
+      
+      {/* Модальное окно поиска */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   )
 }

@@ -22,3 +22,18 @@ export interface ApiFormData {
   showSuccessIcon: boolean
 }
 
+// Типы для поиска
+export interface SearchResult {
+  id: string | number
+  title: string
+  slug: string
+  description: string
+  url: string
+}
+
+export interface SearchResponse {
+  results: SearchResult[]
+  total: number
+  query: string
+}
+
