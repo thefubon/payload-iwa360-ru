@@ -40,9 +40,8 @@ export default async function Home() {
   // Настройки декоративной линии
   const showLine = homePage.showDecorativeLine || false
   const lineSettings = homePage.decorativeLineSettings
-  const scale = lineSettings?.scale || 100
   
-  // Адаптивные отступы
+  // Адаптивные отступы от шапки
   const topOffsetMobile = lineSettings?.topOffsetMobile ?? -100
   const topOffsetSm = lineSettings?.topOffsetSm ?? -100
   const topOffsetMd = lineSettings?.topOffsetMd ?? -100
@@ -50,7 +49,15 @@ export default async function Home() {
   const topOffsetXl = lineSettings?.topOffsetXl ?? -100
   const topOffset2xl = lineSettings?.topOffset2xl ?? -100
 
-  // CSS переменные для адаптивных отступов
+  // Адаптивный масштаб
+  const scaleMobile = lineSettings?.scaleMobile ?? 105
+  const scaleSm = lineSettings?.scaleSm ?? 105
+  const scaleMd = lineSettings?.scaleMd ?? 105
+  const scaleLg = lineSettings?.scaleLg ?? 105
+  const scaleXl = lineSettings?.scaleXl ?? 105
+  const scale2xl = lineSettings?.scale2xl ?? 105
+
+  // CSS переменные для адаптивных отступов и масштаба
   const lineStyleVars = {
     '--line-top-mobile': `${topOffsetMobile}px`,
     '--line-top-sm': `${topOffsetSm}px`,
@@ -58,7 +65,12 @@ export default async function Home() {
     '--line-top-lg': `${topOffsetLg}px`,
     '--line-top-xl': `${topOffsetXl}px`,
     '--line-top-2xl': `${topOffset2xl}px`,
-    '--line-scale': `${scale}%`,
+    '--line-scale-mobile': `${scaleMobile}%`,
+    '--line-scale-sm': `${scaleSm}%`,
+    '--line-scale-md': `${scaleMd}%`,
+    '--line-scale-lg': `${scaleLg}%`,
+    '--line-scale-xl': `${scaleXl}%`,
+    '--line-scale-2xl': `${scale2xl}%`,
   } as React.CSSProperties
 
   // Формируем стили для background (используются CSS переменные)

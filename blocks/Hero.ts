@@ -80,62 +80,244 @@ export const Hero: Block = {
       label: 'Настройки декоративной линии',
       admin: {
         initCollapsed: true,
-        description: 'Настройте положение декоративной SVG линии для разных размеров экрана',
+        description: 'Настройте положение, отступы и масштаб декоративной SVG линии',
       },
       fields: [
         {
-          name: 'lineTopOffsetMobile',
-          type: 'number',
-          label: 'Mobile (до 640px)',
-          defaultValue: 8,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
-        },
-        {
-          name: 'lineTopOffsetSm',
-          type: 'number',
-          label: 'SM (640px+)',
-          defaultValue: 8,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
-        },
-        {
-          name: 'lineTopOffsetMd',
-          type: 'number',
-          label: 'MD (768px+)',
-          defaultValue: 8,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
-        },
-        {
-          name: 'lineTopOffsetLg',
-          type: 'number',
-          label: 'LG (1024px+)',
-          defaultValue: 0,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
-        },
-        {
-          name: 'lineTopOffsetXl',
-          type: 'number',
-          label: 'XL (1280px+)',
-          defaultValue: 0,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
-        },
-        {
-          name: 'line_top_offset_2xl',
-          type: 'number',
-          label: '2XL (1536px+)',
-          defaultValue: 0,
-          admin: {
-            description: 'Отступ сверху в пикселях',
-          },
+          type: 'tabs',
+          tabs: [
+            {
+              label: 'Отступ от шапки',
+              fields: [
+                {
+                  name: 'lineTopOffsetMobile',
+                  type: 'number',
+                  label: 'Mobile (до 640px)',
+                  defaultValue: 8,
+                  admin: {
+                    description: 'Отступ сверху в пикселях. Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'lineTopOffsetSm',
+                  type: 'number',
+                  label: 'SM (640px+)',
+                  defaultValue: 8,
+                  admin: {
+                    description: 'Отступ сверху в пикселях',
+                  },
+                },
+                {
+                  name: 'lineTopOffsetMd',
+                  type: 'number',
+                  label: 'MD (768px+)',
+                  defaultValue: 8,
+                  admin: {
+                    description: 'Отступ сверху в пикселях',
+                  },
+                },
+                {
+                  name: 'lineTopOffsetLg',
+                  type: 'number',
+                  label: 'LG (1024px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ сверху в пикселях',
+                  },
+                },
+                {
+                  name: 'lineTopOffsetXl',
+                  type: 'number',
+                  label: 'XL (1280px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ сверху в пикселях',
+                  },
+                },
+                {
+                  name: 'line_top_offset_2xl',
+                  type: 'number',
+                  label: '2XL (1536px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ сверху в пикселях',
+                  },
+                },
+              ],
+            },
+            {
+              label: 'Боковые отступы',
+              fields: [
+                {
+                  name: 'lineLeftOffsetMobile',
+                  type: 'number',
+                  label: 'Слева Mobile (до 640px)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях. Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'lineLeftOffsetSm',
+                  type: 'number',
+                  label: 'Слева SM (640px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях',
+                  },
+                },
+                {
+                  name: 'lineLeftOffsetMd',
+                  type: 'number',
+                  label: 'Слева MD (768px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях',
+                  },
+                },
+                {
+                  name: 'lineLeftOffsetLg',
+                  type: 'number',
+                  label: 'Слева LG (1024px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях',
+                  },
+                },
+                {
+                  name: 'lineLeftOffsetXl',
+                  type: 'number',
+                  label: 'Слева XL (1280px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях',
+                  },
+                },
+                {
+                  name: 'lineLeftOffset2xl',
+                  type: 'number',
+                  label: 'Слева 2XL (1536px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ слева в пикселях',
+                  },
+                },
+                {
+                  name: 'lineRightOffsetMobile',
+                  type: 'number',
+                  label: 'Справа Mobile (до 640px)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях. Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'lineRightOffsetSm',
+                  type: 'number',
+                  label: 'Справа SM (640px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях',
+                  },
+                },
+                {
+                  name: 'lineRightOffsetMd',
+                  type: 'number',
+                  label: 'Справа MD (768px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях',
+                  },
+                },
+                {
+                  name: 'lineRightOffsetLg',
+                  type: 'number',
+                  label: 'Справа LG (1024px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях',
+                  },
+                },
+                {
+                  name: 'lineRightOffsetXl',
+                  type: 'number',
+                  label: 'Справа XL (1280px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях',
+                  },
+                },
+                {
+                  name: 'lineRightOffset2xl',
+                  type: 'number',
+                  label: 'Справа 2XL (1536px+)',
+                  defaultValue: 0,
+                  admin: {
+                    description: 'Отступ справа в пикселях',
+                  },
+                },
+              ],
+            },
+            {
+              label: 'Масштаб',
+              fields: [
+                {
+                  name: 'lineScaleMobile',
+                  type: 'number',
+                  label: 'Mobile (до 640px)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах (100 = оригинальный размер)',
+                  },
+                },
+                {
+                  name: 'lineScaleSm',
+                  type: 'number',
+                  label: 'SM (640px+)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах',
+                  },
+                },
+                {
+                  name: 'lineScaleMd',
+                  type: 'number',
+                  label: 'MD (768px+)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах',
+                  },
+                },
+                {
+                  name: 'lineScaleLg',
+                  type: 'number',
+                  label: 'LG (1024px+)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах',
+                  },
+                },
+                {
+                  name: 'lineScaleXl',
+                  type: 'number',
+                  label: 'XL (1280px+)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах',
+                  },
+                },
+                {
+                  name: 'lineScale2xl',
+                  type: 'number',
+                  label: '2XL (1536px+)',
+                  defaultValue: 100,
+                  admin: {
+                    description: 'Масштаб линии в процентах',
+                  },
+                },
+              ],
+            },
+          ],
         },
       ],
     },

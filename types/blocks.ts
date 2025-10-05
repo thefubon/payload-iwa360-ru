@@ -29,12 +29,34 @@ export interface HeroButton {
 
 // Настройки декоративной линии
 export interface DecorativeLineSettings {
+  // Отступы сверху
   lineTopOffsetMobile?: number
   lineTopOffsetSm?: number
   lineTopOffsetMd?: number
   lineTopOffsetLg?: number
   lineTopOffsetXl?: number
   line_top_offset_2xl?: number
+  // Боковые отступы слева
+  lineLeftOffsetMobile?: number
+  lineLeftOffsetSm?: number
+  lineLeftOffsetMd?: number
+  lineLeftOffsetLg?: number
+  lineLeftOffsetXl?: number
+  lineLeftOffset2xl?: number
+  // Боковые отступы справа
+  lineRightOffsetMobile?: number
+  lineRightOffsetSm?: number
+  lineRightOffsetMd?: number
+  lineRightOffsetLg?: number
+  lineRightOffsetXl?: number
+  lineRightOffset2xl?: number
+  // Масштаб
+  lineScaleMobile?: number
+  lineScaleSm?: number
+  lineScaleMd?: number
+  lineScaleLg?: number
+  lineScaleXl?: number
+  lineScale2xl?: number
 }
 
 // Пропсы для компонента HeroBlock

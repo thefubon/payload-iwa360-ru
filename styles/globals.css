@@ -270,39 +270,64 @@ h6 {
   @apply mx-auto px-4;
 }
 
-/* Адаптивные отступы для декоративной линии Hero блока */
+/* Адаптивные отступы и масштаб для декоративной линии Hero блока */
 @layer utilities {
   .hero-line-offset {
     top: var(--line-top-mobile);
+    left: calc(50% + var(--line-left-mobile));
+    right: var(--line-right-mobile);
+    transform: translateX(-50%);
+    scale: var(--line-scale-mobile);
   }
 
   @media (min-width: 640px) {
     .hero-line-offset {
       top: var(--line-top-sm);
+      left: calc(50% + var(--line-left-sm));
+      right: calc(var(--line-right-sm));
+      transform: translateX(-50%);
+      scale: var(--line-scale-sm);
     }
   }
 
   @media (min-width: 768px) {
     .hero-line-offset {
       top: var(--line-top-md);
+      left: calc(50% + var(--line-left-md));
+      right: calc(var(--line-right-md));
+      transform: translateX(-50%);
+      scale: var(--line-scale-md);
     }
   }
 
   @media (min-width: 1024px) {
     .hero-line-offset {
       top: var(--line-top-lg);
+      left: auto;
+      right: calc(-24px + var(--line-right-lg));
+      transform: none;
+      scale: var(--line-scale-lg);
+      bottom: 0;
     }
   }
 
   @media (min-width: 1280px) {
     .hero-line-offset {
       top: var(--line-top-xl);
+      left: auto;
+      right: calc(-24px + var(--line-right-xl));
+      transform: none;
+      scale: var(--line-scale-xl);
     }
   }
 
   @media (min-width: 1536px) {
     .hero-line-offset {
       top: var(--line-top-2xl);
+      left: auto;
+      right: calc(-24px + var(--line-right-2xl));
+      transform: none;
+      scale: var(--line-scale-2xl);
     }
   }
 
@@ -310,36 +335,41 @@ h6 {
   .page-decorative-line {
     background-image: url('/img/GradientLine.svg');
     background-repeat: no-repeat;
-    background-size: var(--line-scale);
+    background-size: var(--line-scale-mobile);
     background-position: center var(--line-top-mobile);
   }
 
   @media (min-width: 640px) {
     .page-decorative-line {
+      background-size: var(--line-scale-sm);
       background-position: center var(--line-top-sm);
     }
   }
 
   @media (min-width: 768px) {
     .page-decorative-line {
+      background-size: var(--line-scale-md);
       background-position: center var(--line-top-md);
     }
   }
 
   @media (min-width: 1024px) {
     .page-decorative-line {
+      background-size: var(--line-scale-lg);
       background-position: center var(--line-top-lg);
     }
   }
 
   @media (min-width: 1280px) {
     .page-decorative-line {
+      background-size: var(--line-scale-xl);
       background-position: center var(--line-top-xl);
     }
   }
 
   @media (min-width: 1536px) {
     .page-decorative-line {
+      background-size: var(--line-scale-2xl);
       background-position: center var(--line-top-2xl);
     }
   }
