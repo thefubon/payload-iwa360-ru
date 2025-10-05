@@ -94,7 +94,7 @@ export default function PartnersBlock({
     <section className="py-12 overflow-hidden">
       <div className="md:container">
         {/* Заголовок и описание */}
-        <div className="mb-12">
+        <div className="mb-8">
           <h2
             className="text-foreground mb-4"
             dangerouslySetInnerHTML={{ __html: title }}
