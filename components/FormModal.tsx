@@ -338,6 +338,7 @@ export default function FormModal({
                         placeholder={field.placeholder}
                         value={String(fieldValue)}
                         onChange={(e) => handleChange(field.name, e.target.value)}
+                        autoComplete="on"
                       />
                     ) : field.fieldType === 'select' ? (
                       <select
@@ -345,6 +346,7 @@ export default function FormModal({
                         name={field.name}
                         value={String(fieldValue)}
                         onChange={(e) => handleChange(field.name, e.target.value)}
+                        autoComplete="on"
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       >
                         <option value="">Выберите...</option>
@@ -382,10 +384,14 @@ export default function FormModal({
                         )}
                         <IMaskInput
                           mask="+7 (000) 000-00-00"
+                          id={field.name}
+                          name={field.name}
                           value={String(fieldValue)}
                           unmask={false}
                           lazy={true}
                           onAccept={(value: string) => handleChange(field.name, value)}
+                          autoComplete="tel"
+                          placeholder={field.placeholder}
                           data-slot="input-group-control"
                           className="flex h-9 flex-1 rounded-none border-0 bg-transparent px-3 py-2 text-sm shadow-none ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 dark:bg-transparent"
                         />
@@ -404,6 +410,13 @@ export default function FormModal({
                           placeholder={field.placeholder}
                           value={String(fieldValue)}
                           onChange={(e) => handleChange(field.name, e.target.value)}
+                          autoComplete={
+                            field.fieldType === 'email' ? 'email' :
+                            field.fieldType === 'tel' ? 'tel' :
+                            field.name.toLowerCase().includes('name') ? 'name' :
+                            field.name.toLowerCase().includes('phone') ? 'tel' :
+                            'on'
+                          }
                         />
                       </InputGroup>
                     )}
