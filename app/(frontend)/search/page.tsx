@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import SearchPage from '@/components/SearchPage'
 import { Metadata } from 'next'
 
@@ -8,6 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function Search() {
-  return <SearchPage />
+  return (
+    <Suspense fallback={<div className="container mx-auto px-4 py-8">Загрузка...</div>}>
+      <SearchPage />
+    </Suspense>
+  )
 }
 

@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
             
             // Добавляем текст из бейджей
             if (block.badges && Array.isArray(block.badges)) {
-              block.badges.forEach((badge) => {
+              block.badges.forEach((badge: { label?: string }) => {
                 blockText += ` ${decodeHtmlEntities(badge.label || '')}`
               })
             }
