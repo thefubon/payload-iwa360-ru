@@ -276,7 +276,7 @@ export default function FormModal({
               </div>
             )}
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold tracking-tight">
+              <h2 className="tracking-tight">
                 {successData.title}
               </h2>
               <p className="text-muted-foreground whitespace-pre-line">

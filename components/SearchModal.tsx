@@ -239,7 +239,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       <FileText className="h-4 w-4 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-base mb-1.5 group-hover:text-primary line-clamp-1 transition-colors">
+                      <h3 className="mb-1.5 group-hover:text-primary line-clamp-1 transition-colors">
                         {highlightText(result.title, query)}
                       </h3>
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-1.5">

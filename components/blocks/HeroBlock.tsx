@@ -11,6 +11,8 @@ import { ProductIcon, type ProductIconType } from '@/components/icons'
 
 export default function HeroBlock({
   backgroundColor = '#ffffff',
+  noPadding = false,
+  decorativeLineSettings,
   textColor = 'foreground',
   title,
   badges = [],
@@ -30,6 +32,24 @@ export default function HeroBlock({
   const textColorClasses = textColor === 'background' 
     ? 'text-background dark:text-background' 
     : 'text-foreground dark:text-foreground'
+
+  // Проверяем, нужно ли скрывать градиент и линию (когда фон прозрачный)
+  const isTransparentBackground = backgroundColor === 'transparent'
+  
+  // Определяем классы padding
+  const paddingClasses = noPadding 
+    ? 'px-0 py-0' 
+    : 'px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12'
+
+  // Создаем CSS переменные для адаптивных отступов линии
+  const lineOffsetStyles = {
+    '--line-top-mobile': `${decorativeLineSettings?.lineTopOffsetMobile ?? 8}px`,
+    '--line-top-sm': `${decorativeLineSettings?.lineTopOffsetSm ?? 8}px`,
+    '--line-top-md': `${decorativeLineSettings?.lineTopOffsetMd ?? 8}px`,
+    '--line-top-lg': `${decorativeLineSettings?.lineTopOffsetLg ?? 0}px`,
+    '--line-top-xl': `${decorativeLineSettings?.lineTopOffsetXl ?? 0}px`,
+    '--line-top-2xl': `${decorativeLineSettings?.line_top_offset_2xl ?? 0}px`,
+  } as React.CSSProperties
 
   const handleFormButtonClick = (button: HeroButton) => {
     if (button.buttonType === 'form' && button.form && typeof button.form === 'object') {
@@ -70,7 +90,7 @@ export default function HeroBlock({
           onClick={() => handleFormButtonClick(button)}
           variant={button.variant || 'default'}
           size="lg"
-          className={`text-base px-8 py-6 w-full lg:w-auto ${customColorClass}`}
+          className={`text-base px-8 py-6 w-full lg:w-auto rounded-lg ${customColorClass}`}
           style={button.textColor ? { ...customTextStyle, '--custom-color': button.textColor } as React.CSSProperties : undefined}
         >
           <span className="inline-flex items-center gap-2">
@@ -86,7 +106,7 @@ export default function HeroBlock({
         asChild
         variant={button.variant || 'default'}
         size="lg"
-        className={`text-base px-8 py-6 w-full lg:w-auto ${customColorClass}`}
+        className={`text-base px-8 py-6 w-full lg:w-auto rounded-lg ${customColorClass}`}
         style={button.textColor ? { ...customTextStyle, '--custom-color': button.textColor } as React.CSSProperties : undefined}
       >
         <Link 
@@ -103,44 +123,51 @@ export default function HeroBlock({
   return (
     <section className="py-4">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-2xl">
+        <div className={`relative overflow-hidden ${!isTransparentBackground ? 'rounded-2xl' : ''}`}>
           {/* Слой 1: Цвет фона */}
           <div
             className="absolute inset-0 z-0"
             style={{ backgroundColor }}
           />
           
-          {/* Слой 2: Градиент (адаптивный) */}
-          <div
-            className="absolute inset-0 z-10 bg-gradient-to-br from-white/60 to-white/0 lg:bg-gradient-to-tl lg:from-white/60 lg:to-white/0"
-          />
+          {/* Слой 2: Градиент (адаптивный) - скрываем если фон прозрачный */}
+          {!isTransparentBackground && (
+            <div
+              className="absolute inset-0 z-10 bg-gradient-to-br from-white/60 to-white/0 lg:bg-gradient-to-tl lg:from-white/60 lg:to-white/0"
+            />
+          )}
 
-          {/* Декоративная линия SVG */}
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 w-[110%] h-auto pointer-events-none lg:left-auto lg:-right-6 lg:translate-x-0 lg:w-[65%] lg:bottom-0">
-            <svg 
-              viewBox="0 0 1196 795" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-auto lg:scale-110 lg:origin-bottom-right"
-              preserveAspectRatio="xMidYMax meet"
+          {/* Декоративная линия SVG - скрываем если фон прозрачный */}
+          {!isTransparentBackground && (
+            <div 
+              className="hero-line-offset absolute left-1/2 -translate-x-1/2 z-10 w-[110%] h-auto pointer-events-none lg:left-auto lg:-right-6 lg:translate-x-0 lg:w-[65%] lg:bottom-0"
+              style={lineOffsetStyles}
             >
-              <path 
-                d="M24.9998 737.832C189.289 665.956 469.547 726.919 644.788 755.801C893.013 796.712 1013.31 766.723 812.298 428.519C611.286 90.3144 227.595 -103.948 375.483 123.042C477.922 280.273 935.841 454.764 1171 503.537" 
-                stroke="white" 
-                strokeOpacity="0.2" 
-                strokeWidth="50" 
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
+              <svg 
+                viewBox="0 0 1196 795" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-auto lg:scale-110 lg:origin-bottom-right"
+                preserveAspectRatio="xMidYMax meet"
+              >
+                <path 
+                  d="M24.9998 737.832C189.289 665.956 469.547 726.919 644.788 755.801C893.013 796.712 1013.31 766.723 812.298 428.519C611.286 90.3144 227.595 -103.948 375.483 123.042C477.922 280.273 935.841 454.764 1171 503.537" 
+                  stroke="white" 
+                  strokeOpacity="0.2" 
+                  strokeWidth="50" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          )}
 
           {/* Контент */}
-          <div className="relative z-20 px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12">
+          <div className={`relative z-20 ${paddingClasses}`}>
             <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:items-center">
               {/* Текстовый блок */}
               <div className="space-y-4 text-left w-full">
                 <h1 
-                  className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${textColorClasses}`}
+                  className={textColorClasses}
                   dangerouslySetInnerHTML={{ __html: title }}
                 />
                 

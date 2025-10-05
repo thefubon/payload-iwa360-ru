@@ -71,7 +71,7 @@ export default async function Page({ params }: PageComponentProps) {
             </Link>
 
             {/* Заголовок страницы */}
-            <h1 className="text-5xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+            <h1 className="mb-6 text-gray-900 dark:text-gray-100">
               {page.title}
             </h1>
 

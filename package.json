@@ -1,12 +1,13 @@
 {
   "name": "payload-iwa360-ru",
-  "version": "0.1.0",
+  "version": "4.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "del": "lsof -ti:3000 | xargs kill -9"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.58.0",

@@ -126,7 +126,7 @@ export default function SearchPage() {
               </Link>
             </Button>
             <div>
-              <h1 className="text-2xl font-bold">Поиск по сайту</h1>
+              <h1>Поиск по сайту</h1>
               <p className="text-sm text-muted-foreground">
                 Найдите нужную информацию на нашем сайте
               </p>
@@ -216,7 +216,7 @@ export default function SearchPage() {
                       <FileText className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg mb-2 group-hover:text-primary line-clamp-1 transition-colors">
+                      <h3 className="mb-2 group-hover:text-primary line-clamp-1 transition-colors">
                         {highlightText(result.title, query)}
                       </h3>
                       <p className="text-sm text-muted-foreground line-clamp-2 mb-2">

@@ -26,7 +26,7 @@ export default function PersonalDataPage() {
         </div>
 
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 md:p-12 space-y-6">
-          <h1 className="text-4xl font-bold mb-6">
+          <h1 className="mb-6">
             Согласие на обработку персональных данных
           </h1>
 
@@ -36,7 +36,7 @@ export default function PersonalDataPage() {
 
           <div className="space-y-6 text-foreground leading-relaxed">
             <section>
-              <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
+              <h2 className="mb-4">1. Общие положения</h2>
               <p>
                 Настоящим я, действуя своей волей и в своем интересе, даю свое согласие
                 IWA360 (далее — «Оператор») на обработку моих персональных данных в
@@ -46,7 +46,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">2. Цели обработки персональных данных</h2>
+              <h2 className="mb-4">2. Цели обработки персональных данных</h2>
               <p>Персональные данные обрабатываются в следующих целях:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Предоставление информации о продуктах и услугах Оператора</li>
@@ -60,7 +60,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">3. Перечень персональных данных</h2>
+              <h2 className="mb-4">3. Перечень персональных данных</h2>
               <p>Оператор обрабатывает следующие персональные данные:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Фамилия, имя, отчество</li>
@@ -73,7 +73,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">4. Способы обработки персональных данных</h2>
+              <h2 className="mb-4">4. Способы обработки персональных данных</h2>
               <p>
                 Обработка персональных данных осуществляется с использованием
                 средств автоматизации и без использования таких средств, включая сбор,
@@ -85,7 +85,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">5. Срок действия согласия</h2>
+              <h2 className="mb-4">5. Срок действия согласия</h2>
               <p>
                 Настоящее согласие действует с момента его предоставления и до момента
                 его отзыва субъектом персональных данных. Согласие может быть отозвано
@@ -95,7 +95,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">6. Меры защиты персональных данных</h2>
+              <h2 className="mb-4">6. Меры защиты персональных данных</h2>
               <p>
                 Оператор принимает необходимые и достаточные правовые, организационные
                 и технические меры для защиты персональных данных от неправомерного или
@@ -105,7 +105,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">7. Права субъекта персональных данных</h2>
+              <h2 className="mb-4">7. Права субъекта персональных данных</h2>
               <p>Субъект персональных данных имеет право:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Получать информацию, касающуюся обработки его персональных данных</li>
@@ -116,7 +116,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">8. Контактная информация</h2>
+              <h2 className="mb-4">8. Контактная информация</h2>
               <p>
                 По всем вопросам, связанным с обработкой персональных данных, вы можете
                 обратиться к Оператору, используя контактные данные, указанные на сайте.
@@ -124,7 +124,7 @@ export default function PersonalDataPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">9. Подтверждение</h2>
+              <h2 className="mb-4">9. Подтверждение</h2>
               <p>
                 Отправляя форму обратной связи или регистрируясь на сайте, я подтверждаю,
                 что ознакомлен с настоящим согласием и принимаю его условия. Я понимаю,

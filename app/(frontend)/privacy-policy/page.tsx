@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 md:p-12 space-y-6">
-          <h1 className="text-4xl font-bold mb-6">
+          <h1 className="mb-6">
             Политика конфиденциальности
           </h1>
 
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
 
           <div className="space-y-6 text-foreground leading-relaxed">
             <section>
-              <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
+              <h2 className="mb-4">1. Общие положения</h2>
               <p>
                 Настоящая Политика конфиденциальности (далее — «Политика») определяет
                 порядок обработки и защиты персональных данных пользователей сайта
@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">2. Определения</h2>
+              <h2 className="mb-4">2. Определения</h2>
               <ul className="space-y-3">
                 <li>
                   <strong>Оператор</strong> — IWA360, организация, которая определяет
@@ -72,7 +72,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">3. Какие данные мы собираем</h2>
+              <h2 className="mb-4">3. Какие данные мы собираем</h2>
               <p>Мы можем собирать следующие категории персональных данных:</p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                 <li>
@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">4. Цели обработки данных</h2>
+              <h2 className="mb-4">4. Цели обработки данных</h2>
               <p>Мы обрабатываем персональные данные в следующих целях:</p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                 <li>Предоставление доступа к функциональности Сайта</li>
@@ -111,7 +111,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">5. Правовые основания обработки</h2>
+              <h2 className="mb-4">5. Правовые основания обработки</h2>
               <p>Обработка персональных данных осуществляется на основании:</p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                 <li>Согласия субъекта персональных данных</li>
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">6. Способы и сроки обработки</h2>
+              <h2 className="mb-4">6. Способы и сроки обработки</h2>
               <p>
                 Обработка персональных данных осуществляется с использованием средств
                 автоматизации и без использования таких средств. Персональные данные
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">7. Передача данных третьим лицам</h2>
+              <h2 className="mb-4">7. Передача данных третьим лицам</h2>
               <p>
                 Мы не продаем и не передаем персональные данные третьим лицам без
                 согласия субъекта персональных данных, за исключением случаев,
@@ -155,7 +155,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">8. Меры защиты персональных данных</h2>
+              <h2 className="mb-4">8. Меры защиты персональных данных</h2>
               <p>
                 Мы принимаем необходимые правовые, организационные и технические меры
                 для защиты персональных данных от неправомерного доступа, уничтожения,
@@ -173,7 +173,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">9. Файлы cookie</h2>
+              <h2 className="mb-4">9. Файлы cookie</h2>
               <p>
                 Сайт использует файлы cookie для обеспечения функциональности,
                 персонализации контента и анализа трафика. Cookie — это небольшие
@@ -187,7 +187,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">10. Права субъекта персональных данных</h2>
+              <h2 className="mb-4">10. Права субъекта персональных данных</h2>
               <p>Вы имеете следующие права в отношении своих персональных данных:</p>
               <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                 <li>Право на получение информации об обработке персональных данных</li>
@@ -205,7 +205,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">11. Изменение Политики</h2>
+              <h2 className="mb-4">11. Изменение Политики</h2>
               <p>
                 Мы оставляем за собой право вносить изменения в настоящую Политику в
                 любое время. Новая редакция Политики вступает в силу с момента ее
@@ -215,7 +215,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">12. Контакты</h2>
+              <h2 className="mb-4">12. Контакты</h2>
               <p>
                 По всем вопросам, связанным с обработкой персональных данных и настоящей
                 Политикой, вы можете обратиться к нам через форму обратной связи на
@@ -228,7 +228,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4">13. Применимое право</h2>
+              <h2 className="mb-4">13. Применимое право</h2>
               <p>
                 К настоящей Политике и отношениям, связанным с обработкой персональных
                 данных, применяется законодательство Российской Федерации. Все споры

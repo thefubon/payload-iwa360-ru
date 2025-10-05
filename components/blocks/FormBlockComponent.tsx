@@ -270,7 +270,7 @@ export default function FormBlockComponent({
                 </div>
               )}
               <div className="space-y-3">
-                <h2 className="text-3xl md:text-4xl font-bold">
+                <h2>
                   {successData.title}
                 </h2>
                 <p className="text-lg text-muted-foreground whitespace-pre-line">
@@ -302,7 +302,7 @@ export default function FormBlockComponent({
           {(title || description) && (
             <div className="text-center mb-8 max-w-2xl mx-auto space-y-3">
               {title && (
-                <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>
+                <h2>{title}</h2>
               )}
               {description && (
                 <p className="text-lg text-muted-foreground whitespace-pre-line">

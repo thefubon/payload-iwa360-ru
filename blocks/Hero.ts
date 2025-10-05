@@ -14,6 +14,7 @@ export const Hero: Block = {
       defaultValue: '#ffffff',
       required: true,
       options: [
+        { label: 'Без фона', value: 'transparent' },
         { label: 'Primary 50', value: '#E0F7F2' },
         { label: 'Primary 500', value: '#00B08B' },
         { label: 'White', value: '#ffffff' },
@@ -64,6 +65,79 @@ export const Hero: Block = {
       admin: {
         description: 'Выберите цвет фона из палитры Tailwind',
       },
+    },
+    {
+      name: 'noPadding',
+      type: 'checkbox',
+      label: 'Без отступов',
+      defaultValue: false,
+      admin: {
+        description: 'Убрать внутренние отступы (padding) у Hero блока',
+      },
+    },
+    {
+      type: 'collapsible',
+      label: 'Настройки декоративной линии',
+      admin: {
+        initCollapsed: true,
+        description: 'Настройте положение декоративной SVG линии для разных размеров экрана',
+      },
+      fields: [
+        {
+          name: 'lineTopOffsetMobile',
+          type: 'number',
+          label: 'Mobile (до 640px)',
+          defaultValue: 8,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+        {
+          name: 'lineTopOffsetSm',
+          type: 'number',
+          label: 'SM (640px+)',
+          defaultValue: 8,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+        {
+          name: 'lineTopOffsetMd',
+          type: 'number',
+          label: 'MD (768px+)',
+          defaultValue: 8,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+        {
+          name: 'lineTopOffsetLg',
+          type: 'number',
+          label: 'LG (1024px+)',
+          defaultValue: 0,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+        {
+          name: 'lineTopOffsetXl',
+          type: 'number',
+          label: 'XL (1280px+)',
+          defaultValue: 0,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+        {
+          name: 'line_top_offset_2xl',
+          type: 'number',
+          label: '2XL (1536px+)',
+          defaultValue: 0,
+          admin: {
+            description: 'Отступ сверху в пикселях',
+          },
+        },
+      ],
     },
     {
       name: 'textColor',

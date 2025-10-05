@@ -39,20 +39,34 @@ export default async function Home() {
 
   // Настройки декоративной линии
   const showLine = homePage.showDecorativeLine || false
-  const topOffset = homePage.decorativeLineSettings?.topOffset || 0
-  const scale = homePage.decorativeLineSettings?.scale || 100
+  const lineSettings = homePage.decorativeLineSettings
+  const scale = lineSettings?.scale || 100
+  
+  // Адаптивные отступы
+  const topOffsetMobile = lineSettings?.topOffsetMobile ?? -100
+  const topOffsetSm = lineSettings?.topOffsetSm ?? -100
+  const topOffsetMd = lineSettings?.topOffsetMd ?? -100
+  const topOffsetLg = lineSettings?.topOffsetLg ?? -100
+  const topOffsetXl = lineSettings?.topOffsetXl ?? -100
+  const topOffset2xl = lineSettings?.topOffset2xl ?? -100
 
-  // Формируем стили для background
-  const backgroundStyle = showLine ? {
-    backgroundImage: "url('/img/GradientLine.svg')",
-    backgroundSize: `${scale}%`,
-    backgroundPosition: `center ${topOffset}px`,
-    backgroundRepeat: 'no-repeat',
-  } : {}
+  // CSS переменные для адаптивных отступов
+  const lineStyleVars = {
+    '--line-top-mobile': `${topOffsetMobile}px`,
+    '--line-top-sm': `${topOffsetSm}px`,
+    '--line-top-md': `${topOffsetMd}px`,
+    '--line-top-lg': `${topOffsetLg}px`,
+    '--line-top-xl': `${topOffsetXl}px`,
+    '--line-top-2xl': `${topOffset2xl}px`,
+    '--line-scale': `${scale}%`,
+  } as React.CSSProperties
+
+  // Формируем стили для background (используются CSS переменные)
+  const backgroundStyle = showLine ? lineStyleVars : {}
 
   return (
     <main 
-      className={`flex-1 ${homePage.showPageBackground ? 'bg-slate-100' : 'bg-white'}`}
+      className={`flex-1 ${homePage.showPageBackground ? 'bg-slate-100' : 'bg-white'} ${showLine ? 'page-decorative-line' : ''}`}
       style={backgroundStyle}
     >
       {/* Контент страницы */}
@@ -85,7 +99,7 @@ export default async function Home() {
                 </div>
 
                 {/* Заголовок */}
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+                <h1 className="mb-4 text-foreground">
                   Страница пуста
                 </h1>
 

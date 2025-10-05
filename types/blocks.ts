@@ -27,9 +27,21 @@ export interface HeroButton {
   icon?: string
 }
 
+// Настройки декоративной линии
+export interface DecorativeLineSettings {
+  lineTopOffsetMobile?: number
+  lineTopOffsetSm?: number
+  lineTopOffsetMd?: number
+  lineTopOffsetLg?: number
+  lineTopOffsetXl?: number
+  line_top_offset_2xl?: number
+}
+
 // Пропсы для компонента HeroBlock
 export interface HeroBlockProps {
   backgroundColor?: string
+  noPadding?: boolean
+  decorativeLineSettings?: DecorativeLineSettings
   textColor?: 'foreground' | 'background'
   title: string
   badges?: Badge[]
@@ -44,6 +56,8 @@ export interface HeroBlockData {
   blockType: 'hero'
   id?: string
   backgroundColor?: string
+  noPadding?: boolean
+  decorativeLineSettings?: DecorativeLineSettings
   textColor?: 'foreground' | 'background'
   title: string
   badges?: Badge[]

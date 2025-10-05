@@ -83,12 +83,57 @@ export const HomePage: GlobalConfig = {
               },
               fields: [
                 {
-                  name: 'topOffset',
+                  name: 'topOffsetMobile',
                   type: 'number',
-                  label: 'Отступ от шапки (px)',
-                  defaultValue: 0,
+                  label: 'Отступ от шапки Mobile (px)',
+                  defaultValue: -100,
                   admin: {
-                    description: 'Отступ сверху. Может быть отрицательным (например: -100 или 100)',
+                    description: 'Отступ сверху для мобильных (до 640px). Может быть отрицательным',
+                  },
+                },
+                {
+                  name: 'topOffsetSm',
+                  type: 'number',
+                  label: 'Отступ от шапки SM (px)',
+                  defaultValue: -100,
+                  admin: {
+                    description: 'Отступ сверху для экранов от 640px',
+                  },
+                },
+                {
+                  name: 'topOffsetMd',
+                  type: 'number',
+                  label: 'Отступ от шапки MD (px)',
+                  defaultValue: -100,
+                  admin: {
+                    description: 'Отступ сверху для экранов от 768px',
+                  },
+                },
+                {
+                  name: 'topOffsetLg',
+                  type: 'number',
+                  label: 'Отступ от шапки LG (px)',
+                  defaultValue: -100,
+                  admin: {
+                    description: 'Отступ сверху для экранов от 1024px',
+                  },
+                },
+                {
+                  name: 'topOffsetXl',
+                  type: 'number',
+                  label: 'Отступ от шапки XL (px)',
+                  defaultValue: -100,
+                  admin: {
+                    description: 'Отступ сверху для экранов от 1280px',
+                  },
+                },
+                {
+                  name: 'topOffset2xl',
+                  type: 'number',
+                  label: 'Отступ от шапки 2XL (px)',
+                  defaultValue: -100,
+                  admin: {
+                    description: 'Отступ сверху для экранов от 1536px',
                   },
                 },
                 {
@@ -113,7 +158,7 @@ export const HomePage: GlobalConfig = {
                   name: 'scale',
                   type: 'number',
                   label: 'Масштаб (%)',
-                  defaultValue: 100,
+                  defaultValue: 105,
                   min: 10,
                   max: 500,
                   admin: {

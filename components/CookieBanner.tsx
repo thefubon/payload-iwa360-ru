@@ -46,7 +46,7 @@ export default function CookieBanner({
         <div className="flex items-start gap-3">
           <Cookie className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
           <div className="flex-1 space-y-2">
-            <h3 className="font-semibold text-base text-foreground">
+            <h3 className="text-foreground">
               {title}
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
