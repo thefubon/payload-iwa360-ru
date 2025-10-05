@@ -46,13 +46,13 @@ export default function PartnersBlock({
       <div
         className={`
           group
-          relative flex-shrink-0 h-24 w-52 flex items-center justify-center px-8
+          relative flex-shrink-0 h-20 w-40 md:h-24 md:w-52 flex items-center justify-center p-6 md:p-7
           rounded-2xl
           transition-all duration-300
+          cursor-pointer
           ${showCardBackground ? 'bg-slate-100 hover:bg-white' : 'bg-transparent'}
           hover:shadow-md
-        `}
-      >
+        `}>
         <Image
           src={logo.logo.url}
           alt={logo.alt}
@@ -92,23 +92,23 @@ export default function PartnersBlock({
 
   return (
     <section className="py-12 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="md:container">
         {/* Заголовок и описание */}
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <h2
             className="text-foreground mb-4"
             dangerouslySetInnerHTML={{ __html: title }}
           />
           {description && (
-            <p 
-              className="text-lg text-muted-foreground max-w-3xl mx-auto"
+            <p
+              className="text-lg text-muted-foreground max-w-3xl"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}
         </div>
 
         {/* Infinite scroll контейнер */}
-        <div 
+        <div
           className="relative w-full overflow-hidden py-2"
           onMouseEnter={() => {
             if (scrollerRef.current) {
@@ -119,18 +119,15 @@ export default function PartnersBlock({
             if (scrollerRef.current) {
               scrollerRef.current.style.animationPlayState = 'running'
             }
-          }}
-        >
-          
+          }}>
           {/* Анимированная лента логотипов */}
-          <div 
+          <div
             ref={scrollerRef}
             className={`flex gap-4 py-2 ${isAnimating ? 'animate-infinite-scroll' : ''}`}
             style={{
               animationDuration: `${getAnimationDuration()}s`,
               width: 'max-content',
-            }}
-          >
+            }}>
             {duplicatedLogos.map((logo, index) => renderLogo(logo, index))}
           </div>
         </div>

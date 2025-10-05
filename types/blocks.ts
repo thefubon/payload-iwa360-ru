@@ -67,7 +67,7 @@ export interface HeroBlockProps {
   textColor?: 'foreground' | 'background'
   title: string
   badges?: Badge[]
-  description: string
+  description?: string
   image: MediaType
   buttons?: HeroButton[]
   consentText?: string
@@ -83,7 +83,7 @@ export interface HeroBlockData {
   textColor?: 'foreground' | 'background'
   title: string
   badges?: Badge[]
-  description: string
+  description?: string
   image: MediaType
   buttons?: HeroButton[]
   consentText?: string

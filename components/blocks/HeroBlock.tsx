@@ -97,7 +97,7 @@ export default function HeroBlock({
     const buttonContent = (
       <>
         <span>{button.text}</span>
-        {IconComponent && <IconComponent className="w-5 h-5" />}
+        {IconComponent && <IconComponent className="size-6" />}
       </>
     )
 
@@ -183,7 +183,7 @@ export default function HeroBlock({
           <div className={`relative z-20 ${paddingClasses}`}>
             <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:items-center">
               {/* Текстовый блок */}
-              <div className="space-y-4 text-left w-full">
+              <div className="space-y-8 text-left w-full">
                 <h1 
                   className={textColorClasses}
                   dangerouslySetInnerHTML={{ __html: title }}
@@ -191,7 +191,7 @@ export default function HeroBlock({
                 
                 {/* Бейджи */}
                 {badges && badges.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {badges.map((badge, index) => {
                       const opacity = badge.isActive !== false ? 'opacity-100' : 'opacity-50'
                       
@@ -229,14 +229,17 @@ export default function HeroBlock({
                   </div>
                 )}
                 
-                <p 
-                  className={`text-lg md:text-xl leading-relaxed ${textColorClasses}`}
-                  dangerouslySetInnerHTML={{ __html: description }}
-                />
+                {/* Описание - показываем только если заполнено */}
+                {description && (
+                  <p 
+                    className={`text-lg md:text-xl leading-relaxed ${textColorClasses}`}
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                )}
 
                 {/* Кнопки */}
                 {buttons && buttons.length > 0 && (
-                  <div className="pt-2 flex flex-col lg:flex-row gap-4 justify-start w-full">
+                  <div className="pt-2 md:pt-4 flex flex-col lg:flex-row gap-4 justify-start w-full">
                     {buttons.map((button, index) => renderButton(button, index))}
                   </div>
                 )}

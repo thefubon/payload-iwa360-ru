@@ -512,7 +512,10 @@ export const Hero: Block = {
       name: 'description',
       type: 'textarea',
       label: 'Описание',
-      required: true,
+      required: false,
+      admin: {
+        description: 'Описание под заголовком (необязательное)',
+      },
     },
     {
       name: 'image',
