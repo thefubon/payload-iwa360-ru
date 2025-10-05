@@ -7,10 +7,18 @@ export interface MediaType {
   height?: number
 }
 
+import type { ProductIconType } from './components'
+
 export interface DropdownItemPayload {
   label: string
   url: string
+  iconType?: 'none' | 'custom' | 'image'
+  customIcon?: ProductIconType
+  iconBgColor?: string
+  iconColor?: string
+  iconSize?: number
   icon?: string | MediaType
+  imageWidth?: number
   description?: string
   activeTextColor?: string
   activeBorderColor?: string

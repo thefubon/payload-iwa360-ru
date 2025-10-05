@@ -55,7 +55,13 @@ export default async function RootLayout({
     dropdownItems: item.dropdownItems?.map((dropItem) => ({
       label: dropItem.label,
       url: dropItem.url,
+      iconType: dropItem.iconType,
+      customIcon: dropItem.customIcon,
+      iconBgColor: dropItem.iconBgColor,
+      iconColor: dropItem.iconColor,
+      iconSize: dropItem.iconSize,
       icon: dropItem.icon && typeof dropItem.icon === 'object' ? dropItem.icon : undefined,
+      imageWidth: dropItem.imageWidth,
       description: dropItem.description,
       activeTextColor: dropItem.activeTextColor,
       activeBorderColor: dropItem.activeBorderColor,

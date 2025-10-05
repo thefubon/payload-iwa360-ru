@@ -375,6 +375,7 @@ export const Hero: Block = {
             { label: 'Почта и календарь', value: 'mail' },
             { label: 'Диск и документы', value: 'disk' },
             { label: 'ИИ-ассистент', value: 'ai' },
+            { label: 'Календарь', value: 'calendar' },
             { label: 'Без иконки', value: 'none' },
           ],
         },

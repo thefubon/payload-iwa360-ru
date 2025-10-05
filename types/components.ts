@@ -14,7 +14,13 @@ export interface ListItemProps {
   title: string
   href: string
   children?: React.ReactNode
+  iconType?: 'none' | 'custom' | 'image'
+  customIcon?: ProductIconType
+  iconBgColor?: string
+  iconColor?: string
+  iconSize?: number
   icon?: MediaType
+  imageWidth?: number
 }
 
 export interface PageComponentProps {
@@ -63,11 +69,13 @@ export type ProductIconType =
   | 'mail' 
   | 'disk' 
   | 'ai' 
+  | 'calendar'
   | 'none'
 
 export interface ProductIconProps {
   icon: ProductIconType
   className?: string
   size?: number
+  style?: React.CSSProperties
 }
 
