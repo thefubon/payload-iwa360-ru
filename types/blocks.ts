@@ -89,6 +89,34 @@ export interface FormBlockData {
   form: string | FormData
 }
 
+// Типы для Partners блока
+export interface PartnerLogo {
+  id?: string
+  logo: MediaType
+  alt: string
+  link?: string
+}
+
+export interface PartnersBlockProps {
+  title: string
+  description?: string
+  logos: PartnerLogo[]
+  animationSpeed?: 'slow' | 'normal' | 'fast'
+  grayscale?: boolean
+  showCardBackground?: boolean
+}
+
+export interface PartnersBlockData {
+  blockType: 'partners'
+  id?: string
+  title: string
+  description?: string
+  logos: PartnerLogo[]
+  animationSpeed?: 'slow' | 'normal' | 'fast'
+  grayscale?: boolean
+  showCardBackground?: boolean
+}
+
 // Базовый тип для любого блока
 export interface BlockType {
   blockType: string

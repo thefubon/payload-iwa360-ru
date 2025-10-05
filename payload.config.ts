@@ -12,6 +12,7 @@ import { Forms } from './collections/Forms'
 import { FormSubmissions } from './collections/FormSubmissions'
 
 // Import globals
+import { HomePage } from './globals/HomePage'
 import { Settings } from './globals/Settings'
 
 export default buildConfig({
@@ -22,10 +23,10 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Define and configure your collections in this array
-  collections: [Users, Media, Pages, Forms, FormSubmissions],
+  collections: [Users, Media, Forms, FormSubmissions, Pages],
 
   // Define global settings
-  globals: [Settings],
+  globals: [HomePage, Settings],
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || '',

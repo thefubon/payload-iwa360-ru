@@ -1,9 +1,14 @@
 import { CollectionConfig } from 'payload'
 import { Hero } from '../blocks/Hero'
 import { FormBlock } from '../blocks/FormBlock'
+import { Partners } from '../blocks/Partners'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  labels: {
+    singular: 'Страница',
+    plural: 'Страницы',
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
@@ -52,10 +57,19 @@ export const Pages: CollectionConfig = {
       required: true,
     },
     {
+      name: 'showPageBackground',
+      type: 'checkbox',
+      label: 'Серый фон страницы',
+      defaultValue: false,
+      admin: {
+        description: 'Включить серый фон (Slate 100) для всей страницы',
+      },
+    },
+    {
       name: 'layout',
       type: 'blocks',
       label: 'Контент страницы',
-      blocks: [Hero, FormBlock],
+      blocks: [Hero, FormBlock, Partners],
       admin: {
         initCollapsed: true,
       },

@@ -5,6 +5,7 @@ export interface PageData {
   title: string
   slug: string
   description: string
+  showPageBackground?: boolean
   layout?: Array<{
     blockType: string
     id?: string

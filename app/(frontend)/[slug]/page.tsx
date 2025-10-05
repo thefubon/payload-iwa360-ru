@@ -54,7 +54,7 @@ export default async function Page({ params }: PageComponentProps) {
   const consentText = settings.formConsent?.text || 'Нажимая на кнопку отправить, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности.'
 
   return (
-    <div>
+    <div className={page.showPageBackground ? 'bg-slate-100' : 'bg-white'}>
       {/* Рендерим блоки конструктора страниц */}
       {page.layout && page.layout.length > 0 ? (
         <RenderBlocks blocks={page.layout} consentText={consentText} />

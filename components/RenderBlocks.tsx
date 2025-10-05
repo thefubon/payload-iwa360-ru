@@ -1,6 +1,7 @@
 import HeroBlock from './blocks/HeroBlock'
 import FormBlockComponent from './blocks/FormBlockComponent'
-import type { HeroBlockData, FormBlockData, FormData } from '@/types/blocks'
+import PartnersBlock from './blocks/PartnersBlock'
+import type { HeroBlockData, FormBlockData, FormData, PartnersBlockData } from '@/types/blocks'
 import type { RenderBlocksProps } from '@/types/components'
 
 export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps) {
@@ -42,6 +43,19 @@ export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps)
                 title={formBlock.title}
                 description={formBlock.description}
                 formData={formData as FormData}
+              />
+            )
+          case 'partners':
+            const partnersBlock = block as unknown as PartnersBlockData
+            return (
+              <PartnersBlock
+                key={block.id || index}
+                title={partnersBlock.title}
+                description={partnersBlock.description}
+                logos={partnersBlock.logos}
+                animationSpeed={partnersBlock.animationSpeed}
+                grayscale={partnersBlock.grayscale}
+                showCardBackground={partnersBlock.showCardBackground}
               />
             )
           default:
