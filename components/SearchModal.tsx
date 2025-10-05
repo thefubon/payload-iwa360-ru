@@ -135,7 +135,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[650px] max-h-[85vh] flex flex-col p-0 gap-0">
         <DialogHeader className="px-6 pt-6 pb-4 border-b">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-between gap-y-4">
             <div>
               <DialogTitle className="text-xl font-semibold">Поиск по сайту</DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground mt-1">
@@ -144,7 +144,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             </div>
             <div className="flex items-center gap-2">
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="sm"
                 asChild
                 className="hidden sm:flex text-xs"
@@ -153,9 +153,6 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   Открыть в новой вкладке
                 </Link>
               </Button>
-              <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border bg-muted px-2 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                <span className="text-xs">ESC</span>
-              </kbd>
             </div>
           </div>
         </DialogHeader>

@@ -609,12 +609,20 @@ export const Hero: Block = {
               value: 'default',
             },
             {
+              label: 'White',
+              value: 'white',
+            },
+            {
               label: 'Destructive',
               value: 'destructive',
             },
             {
               label: 'Outline',
               value: 'outline',
+            },
+            {
+              label: 'Outline Primary',
+              value: 'outlinePrimary',
             },
             {
               label: 'Secondary',

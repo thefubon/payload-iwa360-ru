@@ -22,7 +22,7 @@ export interface HeroButton {
   form?: string | FormData
   modalTitle?: string
   modalDescription?: string
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  variant?: 'default' | 'white' | 'destructive' | 'outline' | 'outlinePrimary' | 'secondary' | 'ghost' | 'link'
   textColor?: string
   icon?: string
 }
