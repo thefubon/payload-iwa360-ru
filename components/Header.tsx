@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import SearchModal from '@/components/SearchModal'
 import type { HeaderProps, ListItemProps } from '@/types/components'
+import type { MediaType, MenuItemPayload, AuthMenuPayload } from '@/types/payload'
 import { cn } from '@/lib/utils'
 
 // Компонент мобильного меню
@@ -32,9 +33,9 @@ function MobileMenu({
 }: {
   isOpen: boolean
   onClose: () => void
-  menuLogo?: any
-  mainMenu?: any[]
-  authMenu?: any
+  menuLogo?: MediaType
+  mainMenu?: MenuItemPayload[]
+  authMenu?: AuthMenuPayload
   normalizeUrl: (url: string) => string
   isActive: (url: string) => boolean
 }) {
@@ -148,7 +149,7 @@ function MobileMenu({
                     {/* Выпадающие элементы */}
                     {isExpanded && item.dropdownItems && (
                       <div className="pb-4 space-y-2">
-                        {item.dropdownItems.map((dropItem: any, dropIndex: number) => (
+                        {item.dropdownItems.map((dropItem, dropIndex: number) => (
                           <Link
                             key={dropIndex}
                             href={normalizeUrl(dropItem.url)}
@@ -179,7 +180,7 @@ function MobileMenu({
                               </div>
                             )}
                             
-                            {dropItem.iconType === 'image' && dropItem.icon?.url && (
+                            {dropItem.iconType === 'image' && dropItem.icon && typeof dropItem.icon === 'object' && dropItem.icon.url && (
                               <div className="flex-shrink-0">
                                 <Image
                                   src={dropItem.icon.url}
@@ -488,7 +489,7 @@ function DropdownMenuContent({
   normalizeUrl, 
   isActive 
 }: { 
-  items: any[]
+  items: MenuItemPayload['dropdownItems']
   normalizeUrl: (url: string) => string
   isActive: (url: string) => boolean
 }) {
@@ -499,14 +500,14 @@ function DropdownMenuContent({
       <ul className={cn(
         "grid w-full gap-4 py-6",
         // Определяем количество колонок на основе количества элементов
-        items.length === 1 && "md:grid-cols-1",
-        items.length === 2 && "md:grid-cols-2",
-        items.length === 3 && "md:grid-cols-3",
-        items.length === 4 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
-        items.length === 5 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
-        items.length >= 6 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        items && items.length === 1 && "md:grid-cols-1",
+        items && items.length === 2 && "md:grid-cols-2",
+        items && items.length === 3 && "md:grid-cols-3",
+        items && items.length === 4 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        items && items.length === 5 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        items && items.length >= 6 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
       )}>
-        {items.map((dropItem, dropIndex) => (
+        {items?.map((dropItem, dropIndex) => (
           <ListItem
             key={dropIndex}
             title={dropItem.label}
