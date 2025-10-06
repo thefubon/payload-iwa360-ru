@@ -20,7 +20,6 @@ export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps)
                 key={block.id || index}
                 backgroundColor={heroBlock.backgroundColor}
                 noPadding={heroBlock.noPadding}
-                decorativeLineSettings={heroBlock.decorativeLineSettings}
                 textColor={heroBlock.textColor}
                 title={heroBlock.title}
                 badges={heroBlock.badges}
