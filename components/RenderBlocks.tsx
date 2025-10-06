@@ -1,7 +1,8 @@
 import HeroBlock from './blocks/HeroBlock'
 import FormBlockComponent from './blocks/FormBlockComponent'
 import PartnersBlock from './blocks/PartnersBlock'
-import type { HeroBlockData, FormBlockData, FormData, PartnersBlockData } from '@/types/blocks'
+import TabsBlockComponent from './blocks/TabsBlockComponent'
+import type { HeroBlockData, FormBlockData, FormData, PartnersBlockData, TabsBlockData } from '@/types/blocks'
 import type { RenderBlocksProps } from '@/types/components'
 
 export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps) {
@@ -57,6 +58,14 @@ export default function RenderBlocks({ blocks, consentText }: RenderBlocksProps)
                 animationSpeed={partnersBlock.animationSpeed}
                 grayscale={partnersBlock.grayscale}
                 showCardBackground={partnersBlock.showCardBackground}
+              />
+            )
+          case 'tabs':
+            const tabsBlock = block as unknown as TabsBlockData
+            return (
+              <TabsBlockComponent
+                key={block.id || index}
+                tabs={tabsBlock.tabs}
               />
             )
           default:

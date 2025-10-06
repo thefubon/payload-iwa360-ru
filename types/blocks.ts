@@ -119,6 +119,30 @@ export interface PartnersBlockData {
   showCardBackground?: boolean
 }
 
+// Типы для Tabs блока
+export interface TabItem {
+  id?: string
+  label: string
+  iconType: 'lucide' | 'product' | 'upload' | 'none'
+  lucideIcon?: string
+  productIcon?: string
+  iconImage?: MediaType
+  bgColor: string
+  iconColor: string
+  title: string
+  image: MediaType
+}
+
+export interface TabsBlockProps {
+  tabs: TabItem[]
+}
+
+export interface TabsBlockData {
+  blockType: 'tabs'
+  id?: string
+  tabs: TabItem[]
+}
+
 // Базовый тип для любого блока
 export interface BlockType {
   blockType: string

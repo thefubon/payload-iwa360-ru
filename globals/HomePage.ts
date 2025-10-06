@@ -2,6 +2,7 @@ import { GlobalConfig } from 'payload'
 import { Hero } from '../blocks/Hero'
 import { FormBlock } from '../blocks/FormBlock'
 import { Partners } from '../blocks/Partners'
+import { TabsBlock } from '../blocks/TabsBlock'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -46,7 +47,7 @@ export const HomePage: GlobalConfig = {
               name: 'layout',
               type: 'blocks',
               label: 'Блоки конструктора',
-              blocks: [Hero, FormBlock, Partners],
+              blocks: [Hero, FormBlock, Partners, TabsBlock],
               admin: {
                 initCollapsed: true,
               },

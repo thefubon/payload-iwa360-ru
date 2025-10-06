@@ -3,6 +3,8 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { buildConfig } from 'payload'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { en } from '@payloadcms/translations/languages/en'
+import { ru } from '@payloadcms/translations/languages/ru'
 
 // Import collections
 import { Users } from './collections/Users'
@@ -41,6 +43,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI,
     },
+    push: true, // Автоматически обновлять схему базы данных
   }),
 
   // Admin panel configuration
@@ -55,6 +58,12 @@ export default buildConfig({
     //     Icon: '/path/to/icon',
     //   },
     // },
+  },
+
+  // Internationalization (i18n) для админки
+  i18n: {
+    supportedLanguages: { en, ru },
+    fallbackLanguage: 'en',
   },
 
   // If you want to resize images, crop, set focal point, etc.

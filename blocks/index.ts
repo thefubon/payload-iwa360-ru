@@ -3,6 +3,7 @@
 export { Hero } from './Hero'
 export { FormBlock } from './FormBlock'
 export { Partners } from './Partners'
+export { TabsBlock } from './TabsBlock'
 
 // В будущем можно добавить:
 // export { Features } from './Features'

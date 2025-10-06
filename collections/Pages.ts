@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 import { Hero } from '../blocks/Hero'
 import { FormBlock } from '../blocks/FormBlock'
 import { Partners } from '../blocks/Partners'
+import { TabsBlock } from '../blocks/TabsBlock'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -69,7 +70,7 @@ export const Pages: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       label: 'Контент страницы',
-      blocks: [Hero, FormBlock, Partners],
+      blocks: [Hero, FormBlock, Partners, TabsBlock],
       admin: {
         initCollapsed: true,
       },
