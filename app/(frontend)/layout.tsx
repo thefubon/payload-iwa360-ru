@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { getPayload } from "payload";
-import config from "@/payload.config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import { Toaster } from "@/components/ui/sonner";
 import type { SettingsPayload } from "@/types/payload";
+import { getCachedSettings } from "@/lib/cache";
 
 export const metadata: Metadata = {
   title: {
@@ -34,12 +33,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const payload = await getPayload({ config });
-  
-  // Получаем настройки меню
-  const settings = await payload.findGlobal({
-    slug: 'settings',
-  }) as SettingsPayload;
+  // Получаем настройки меню (с кешированием)
+  const settings = await getCachedSettings() as SettingsPayload;
 
   // Подготавливаем данные для Header
   const menuLogo = settings.menuLogo && typeof settings.menuLogo === 'object' 
@@ -77,7 +72,10 @@ export default async function RootLayout({
           authMenu={settings.authMenu}
         />
         {children}
-        <Footer />
+        <Footer 
+          copyrightText={settings.copyrightText}
+          footerLinks={settings.footerLinks}
+        />
         <CookieBanner
           enabled={settings.cookieBanner?.enabled}
           title={settings.cookieBanner?.title}

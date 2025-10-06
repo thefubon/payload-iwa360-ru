@@ -4,6 +4,7 @@ import { FormBlock } from '../blocks/FormBlock'
 import { Partners } from '../blocks/Partners'
 import { TabsBlock } from '../blocks/TabsBlock'
 import { isPublic, canUpdate } from '../access'
+import { revalidateTag } from 'next/cache'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
@@ -15,6 +16,14 @@ export const HomePage: GlobalConfig = {
   access: {
     read: isPublic, // Публичный доступ для чтения
     update: canUpdate, // Редакторы и администраторы могут редактировать
+  },
+  hooks: {
+    afterChange: [
+      async () => {
+        // Инвалидируем кеш при изменении главной страницы
+        revalidateTag('homepage')
+      },
+    ],
   },
   fields: [
     {
@@ -73,9 +82,9 @@ export const HomePage: GlobalConfig = {
               name: 'showDecorativeLine',
               type: 'checkbox',
               label: 'Показать декоративную линию',
-              defaultValue: false,
+              defaultValue: true,
               admin: {
-                description: 'Включить декоративную линию на фоне страницы',
+                description: 'Включить декоративную линию на фоне страницы (настройки в коде)',
               },
             },
             {
@@ -83,7 +92,8 @@ export const HomePage: GlobalConfig = {
               type: 'group',
               label: 'Настройки декоративной линии',
               admin: {
-                condition: (data) => data?.showDecorativeLine === true,
+                condition: () => false, // Скрыто - настройки в коде
+                description: 'Настройки перенесены в код для упрощения',
               },
               fields: [
                 {

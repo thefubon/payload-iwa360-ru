@@ -10,33 +10,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { 
   CheckCircle2, 
   Loader2, 
-  AlertCircle, 
-  Mail, 
-  Phone, 
-  User, 
-  MessageSquare,
-  Building,
-  Briefcase,
-  MapPin,
-  Globe,
-  Link as LinkIcon,
-  Calendar,
-  Clock,
-  Lock,
-  Key,
-  Star,
-  Heart,
-  FileText,
-  Paperclip,
-  Search,
-  Settings,
-  DollarSign,
-  Target,
-  Package,
-  Home,
+  AlertCircle,
 } from 'lucide-react'
 import type { FormBlockComponentProps } from '@/types/components'
-import type { FormField } from '@/types/blocks'
 
 export default function FormBlockComponent({
   backgroundColor = '#ffffff',
@@ -181,77 +157,6 @@ export default function FormBlockComponent({
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  // Функция для получения иконки по имени
-  const getIconComponent = (iconName: string) => {
-    const iconMap: Record<string, React.ReactNode> = {
-      user: <User className="h-4 w-4 text-muted-foreground" />,
-      mail: <Mail className="h-4 w-4 text-muted-foreground" />,
-      phone: <Phone className="h-4 w-4 text-muted-foreground" />,
-      'message-square': <MessageSquare className="h-4 w-4 text-muted-foreground" />,
-      building: <Building className="h-4 w-4 text-muted-foreground" />,
-      briefcase: <Briefcase className="h-4 w-4 text-muted-foreground" />,
-      'map-pin': <MapPin className="h-4 w-4 text-muted-foreground" />,
-      globe: <Globe className="h-4 w-4 text-muted-foreground" />,
-      link: <LinkIcon className="h-4 w-4 text-muted-foreground" />,
-      calendar: <Calendar className="h-4 w-4 text-muted-foreground" />,
-      clock: <Clock className="h-4 w-4 text-muted-foreground" />,
-      lock: <Lock className="h-4 w-4 text-muted-foreground" />,
-      key: <Key className="h-4 w-4 text-muted-foreground" />,
-      star: <Star className="h-4 w-4 text-muted-foreground" />,
-      heart: <Heart className="h-4 w-4 text-muted-foreground" />,
-      'file-text': <FileText className="h-4 w-4 text-muted-foreground" />,
-      paperclip: <Paperclip className="h-4 w-4 text-muted-foreground" />,
-      search: <Search className="h-4 w-4 text-muted-foreground" />,
-      settings: <Settings className="h-4 w-4 text-muted-foreground" />,
-      'dollar-sign': <DollarSign className="h-4 w-4 text-muted-foreground" />,
-      target: <Target className="h-4 w-4 text-muted-foreground" />,
-      package: <Package className="h-4 w-4 text-muted-foreground" />,
-      home: <Home className="h-4 w-4 text-muted-foreground" />,
-    }
-    return iconMap[iconName] || null
-  }
-
-  // Функция для автоматического выбора иконки по типу поля
-  const getAutoIcon = (fieldType: string) => {
-    switch (fieldType) {
-      case 'email':
-        return 'mail'
-      case 'tel':
-        return 'phone'
-      case 'text':
-        return 'user'
-      case 'textarea':
-        return 'message-square'
-      case 'url':
-        return 'link'
-      case 'date':
-        return 'calendar'
-      case 'number':
-        return 'dollar-sign'
-      default:
-        return null
-    }
-  }
-
-  // Функция для получения иконки поля
-  // Function to get the field icon (not used currently but kept for future)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const getFieldIcon = (field: FormField) => {
-    // Если иконка явно установлена как "none", не показываем иконку
-    if (field.icon === 'none') {
-      return null
-    }
-
-    // Если иконка установлена как "auto" или не задана, используем автоматическую
-    if (!field.icon || field.icon === 'auto') {
-      const autoIconName = getAutoIcon(field.fieldType)
-      return autoIconName ? getIconComponent(autoIconName) : null
-    }
-
-    // Иначе используем выбранную иконку
-    return getIconComponent(field.icon)
   }
 
   // Экран успеха

@@ -1,5 +1,5 @@
 import { Block } from 'payload'
-import { backgroundColorOptions, colorOptions, colorOptionsWithBlack, iconOptions, productIconOptions } from './shared'
+import { backgroundColorOptions, colorOptionsWithBlack, iconOptions, productIconOptions, badgeStyleOptions } from './shared'
 
 export const Hero: Block = {
   slug: 'hero',
@@ -77,20 +77,15 @@ export const Hero: Block = {
           options: productIconOptions,
         },
         {
-          name: 'bgColor',
+          name: 'badgeStyle',
           type: 'select',
-          label: 'Цвет фона',
+          label: 'Стиль бейджа',
           required: true,
-          defaultValue: '#f0f9ff',
-          options: colorOptions,
-        },
-        {
-          name: 'textColor',
-          type: 'select',
-          label: 'Цвет текста',
-          required: true,
-          defaultValue: '#0ea5e9',
-          options: colorOptions,
+          defaultValue: 'primary',
+          options: badgeStyleOptions,
+          admin: {
+            description: 'Выберите готовый стиль оформления бейджа',
+          },
         },
         {
           name: 'isActive',

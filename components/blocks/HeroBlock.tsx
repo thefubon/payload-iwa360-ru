@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import FormModal from '@/components/FormModal'
 import type { HeroBlockProps, HeroButton, FormData } from '@/types/blocks'
-import * as Icons from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronRight, Send, Download, Plus, Check, ExternalLink, Search, Rocket, Sparkles } from 'lucide-react'
 import { ProductIcon, type ProductIconType } from '@/components/icons'
+import { getBadgeColors } from '@/blocks/shared'
 
 export default function HeroBlock({
   backgroundColor = '#ffffff',
@@ -52,10 +53,23 @@ export default function HeroBlock({
   }
 
   const renderButton = (button: HeroButton, index: number) => {
-    // Получаем компонент иконки из lucide-react
-    const IconComponent = button.icon && button.icon in Icons 
-      ? Icons[button.icon as keyof typeof Icons] as React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-      : null
+    // Маппинг иконок
+    const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+      'ArrowRight': ArrowRight,
+      'ArrowUpRight': ArrowUpRight,
+      'ChevronRight': ChevronRight,
+      'Send': Send,
+      'Download': Download,
+      'Plus': Plus,
+      'Check': Check,
+      'ExternalLink': ExternalLink,
+      'Search': Search,
+      'Rocket': Rocket,
+      'Sparkles': Sparkles,
+    }
+    
+    // Получаем компонент иконки
+    const IconComponent = button.icon ? iconMap[button.icon] : null
 
     // Создаем inline стиль для кастомного цвета текста
     const customTextStyle = button.textColor ? {
@@ -164,14 +178,18 @@ export default function HeroBlock({
                   <div className="flex flex-wrap gap-3">
                     {badges.map((badge, index) => {
                       const opacity = badge.isActive !== false ? 'opacity-100' : 'opacity-50'
+                      // Получаем цвета из пресета (поддержка и старых bgColor/textColor и новых badgeStyle)
+                      const colors = badge.badgeStyle 
+                        ? getBadgeColors(badge.badgeStyle)
+                        : { bgColor: badge.bgColor || '#f0f9ff', textColor: badge.textColor || '#0ea5e9' }
                       
                       return (
                         <span
                           key={badge.id || index}
                           className={`inline-flex items-center gap-1.5 px-2 py-1.5 lg:gap-1.5 lg:px-3 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-opacity ${opacity}`}
                           style={{
-                            backgroundColor: badge.bgColor,
-                            color: badge.textColor,
+                            backgroundColor: colors.bgColor,
+                            color: colors.textColor,
                           }}
                         >
                           {badge.icon && badge.icon !== 'none' && (

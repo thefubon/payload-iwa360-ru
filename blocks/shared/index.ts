@@ -3,12 +3,17 @@
 export { 
   colorOptions, 
   colorOptionsWithBlack, 
-  backgroundColorOptions 
+  backgroundColorOptions,
+  menuColorOptions
 } from './colorOptions'
 
 export { 
   iconOptions, 
-  productIconOptions, 
-  lucideIconOptions 
+  productIconOptions
 } from './iconOptions'
+
+export {
+  badgeStyleOptions,
+  getBadgeColors
+} from './badgePresets'
 

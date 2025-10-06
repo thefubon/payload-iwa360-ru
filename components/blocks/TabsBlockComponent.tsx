@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { TabsBlockProps } from '@/types/blocks'
 import type { ProductIconType } from '@/types/components'
-import * as Icons from 'lucide-react'
 import { ProductIcon } from '@/components/icons/ProductIcons'
 
 export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
@@ -44,54 +43,22 @@ export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
               items-start
             ">
             {tabs.map((tab, index) => {
-              // Определяем компонент иконки в зависимости от типа
+              // Определяем компонент иконки
               const renderIcon = () => {
                 const isActive = activeTab === (tab.id || String(index))
                 const iconColor = isActive ? tab.iconColor : '#9ca3af'
-                const iconClassName = "size-5 lg:size-6 flex-shrink-0"
 
-                switch (tab.iconType) {
-                  case 'lucide':
-                    if (tab.lucideIcon && tab.lucideIcon in Icons) {
-                      const LucideIcon = Icons[tab.lucideIcon as keyof typeof Icons] as React.ComponentType<{ 
-                        className?: string
-                        style?: React.CSSProperties 
-                      }>
-                      return <LucideIcon className={iconClassName} style={{ color: iconColor }} />
-                    }
-                    return null
-
-                  case 'product':
-                    if (tab.productIcon) {
-                      return (
-                        <ProductIcon 
-                          icon={tab.productIcon as ProductIconType} 
-                          size={24}
-                          style={{ color: iconColor }}
-                        />
-                      )
-                    }
-                    return null
-
-                  case 'upload':
-                    if (tab.iconImage && typeof tab.iconImage === 'object') {
-                      return (
-                        <Image 
-                          src={tab.iconImage.url} 
-                          alt={tab.iconImage.alt || 'icon'}
-                          width={24}
-                          height={24}
-                          className={iconClassName}
-                          style={{ filter: isActive ? 'none' : 'grayscale(100%)' }}
-                        />
-                      )
-                    }
-                    return null
-
-                  case 'none':
-                  default:
-                    return null
+                if (tab.productIcon) {
+                  return (
+                    <ProductIcon 
+                      icon={tab.productIcon as ProductIconType} 
+                      size={24}
+                      style={{ color: iconColor }}
+                    />
+                  )
                 }
+                
+                return null
               }
 
               return (

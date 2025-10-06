@@ -6,8 +6,9 @@ import type { MediaType } from './payload'
 export interface Badge {
   label: string
   icon: string
-  bgColor: string
-  textColor: string
+  badgeStyle?: string // Новый пресет стиля
+  bgColor?: string // Старый способ (для обратной совместимости)
+  textColor?: string // Старый способ (для обратной совместимости)
   isActive?: boolean
   isBeta?: boolean
   id?: string

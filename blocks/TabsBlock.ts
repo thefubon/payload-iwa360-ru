@@ -1,5 +1,5 @@
 import { Block } from 'payload'
-import { colorOptions, colorOptionsWithBlack, lucideIconOptions, productIconOptions } from './shared'
+import { colorOptions, colorOptionsWithBlack, productIconOptions } from './shared'
 
 export const TabsBlock: Block = {
   slug: 'tabs',
@@ -33,49 +33,14 @@ export const TabsBlock: Block = {
           },
         },
         {
-          name: 'iconType',
-          type: 'select',
-          label: 'Тип иконки',
-          required: true,
-          defaultValue: 'lucide',
-          options: [
-            { label: 'Lucide иконка', value: 'lucide' },
-            { label: 'Продуктовая иконка', value: 'product' },
-            { label: 'Загрузить изображение', value: 'upload' },
-            { label: 'Без иконки', value: 'none' },
-          ],
-          admin: {
-            description: 'Выберите тип иконки для кнопки таба',
-          },
-        },
-        {
-          name: 'lucideIcon',
-          type: 'select',
-          label: 'Lucide иконка',
-          admin: {
-            description: 'Выберите иконку из библиотеки Lucide',
-            condition: (data, siblingData) => siblingData?.iconType === 'lucide',
-          },
-          options: lucideIconOptions,
-        },
-        {
           name: 'productIcon',
           type: 'select',
-          label: 'Продуктовая иконка',
-          admin: {
-            description: 'Выберите продуктовую иконку',
-            condition: (data, siblingData) => siblingData?.iconType === 'product',
-          },
+          label: 'Иконка таба',
+          required: true,
+          defaultValue: 'meetings',
           options: productIconOptions,
-        },
-        {
-          name: 'iconImage',
-          type: 'upload',
-          label: 'Изображение иконки',
-          relationTo: 'media',
           admin: {
-            description: 'Загрузите изображение для иконки (рекомендуется SVG или PNG с прозрачностью)',
-            condition: (data, siblingData) => siblingData?.iconType === 'upload',
+            description: 'Выберите продуктовую иконку для таба',
           },
         },
         {

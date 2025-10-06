@@ -44,6 +44,12 @@ export interface AuthMenuPayload {
   }
 }
 
+export interface FooterLink {
+  label: string
+  url: string
+  id?: string
+}
+
 export interface SettingsPayload {
   logo?: string | MediaType
   title?: string
@@ -51,6 +57,8 @@ export interface SettingsPayload {
   menuLogo?: string | MediaType
   mainMenu?: MenuItemPayload[]
   authMenu?: AuthMenuPayload
+  copyrightText?: string
+  footerLinks?: FooterLink[]
   cookieBanner?: {
     enabled?: boolean
     title?: string
