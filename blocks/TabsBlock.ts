@@ -13,7 +13,7 @@ export const TabsBlock: Block = {
       type: 'array',
       label: 'Табы',
       minRows: 2,
-      maxRows: 7,
+      maxRows: 8,
       labels: {
         singular: 'Таб',
         plural: 'Табы',
