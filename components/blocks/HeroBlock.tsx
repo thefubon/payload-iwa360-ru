@@ -12,7 +12,6 @@ import { ProductIcon, type ProductIconType } from '@/components/icons'
 export default function HeroBlock({
   backgroundColor = '#ffffff',
   noPadding = false,
-  decorativeLineSettings,
   textColor = 'foreground',
   title,
   badges = [],
@@ -40,34 +39,6 @@ export default function HeroBlock({
   const paddingClasses = noPadding 
     ? 'px-0 py-0' 
     : 'px-6 sm:px-8 lg:px-12 py-8 sm:py-10 lg:py-12'
-
-  // Создаем CSS переменные для адаптивных отступов и масштаба линии
-  const lineOffsetStyles = {
-    '--line-top-mobile': `${decorativeLineSettings?.lineTopOffsetMobile ?? 8}px`,
-    '--line-top-sm': `${decorativeLineSettings?.lineTopOffsetSm ?? 8}px`,
-    '--line-top-md': `${decorativeLineSettings?.lineTopOffsetMd ?? 8}px`,
-    '--line-top-lg': `${decorativeLineSettings?.lineTopOffsetLg ?? 0}px`,
-    '--line-top-xl': `${decorativeLineSettings?.lineTopOffsetXl ?? 0}px`,
-    '--line-top-2xl': `${decorativeLineSettings?.line_top_offset_2xl ?? 0}px`,
-    '--line-left-mobile': `${decorativeLineSettings?.lineLeftOffsetMobile ?? 0}px`,
-    '--line-left-sm': `${decorativeLineSettings?.lineLeftOffsetSm ?? 0}px`,
-    '--line-left-md': `${decorativeLineSettings?.lineLeftOffsetMd ?? 0}px`,
-    '--line-left-lg': `${decorativeLineSettings?.lineLeftOffsetLg ?? 0}px`,
-    '--line-left-xl': `${decorativeLineSettings?.lineLeftOffsetXl ?? 0}px`,
-    '--line-left-2xl': `${decorativeLineSettings?.lineLeftOffset2xl ?? 0}px`,
-    '--line-right-mobile': `${decorativeLineSettings?.lineRightOffsetMobile ?? 0}px`,
-    '--line-right-sm': `${decorativeLineSettings?.lineRightOffsetSm ?? 0}px`,
-    '--line-right-md': `${decorativeLineSettings?.lineRightOffsetMd ?? 0}px`,
-    '--line-right-lg': `${decorativeLineSettings?.lineRightOffsetLg ?? 0}px`,
-    '--line-right-xl': `${decorativeLineSettings?.lineRightOffsetXl ?? 0}px`,
-    '--line-right-2xl': `${decorativeLineSettings?.lineRightOffset2xl ?? 0}px`,
-    '--line-scale-mobile': `${decorativeLineSettings?.lineScaleMobile ?? 100}%`,
-    '--line-scale-sm': `${decorativeLineSettings?.lineScaleSm ?? 100}%`,
-    '--line-scale-md': `${decorativeLineSettings?.lineScaleMd ?? 100}%`,
-    '--line-scale-lg': `${decorativeLineSettings?.lineScaleLg ?? 100}%`,
-    '--line-scale-xl': `${decorativeLineSettings?.lineScaleXl ?? 100}%`,
-    '--line-scale-2xl': `${decorativeLineSettings?.lineScale2xl ?? 100}%`,
-  } as React.CSSProperties
 
   const handleFormButtonClick = (button: HeroButton) => {
     if (button.buttonType === 'form' && button.form && typeof button.form === 'object') {
@@ -158,8 +129,7 @@ export default function HeroBlock({
           {/* Декоративная линия SVG - скрываем если фон прозрачный */}
           {!isTransparentBackground && (
             <div 
-              className="hero-line-offset absolute z-10 w-[110%] h-auto pointer-events-none lg:w-[65%] lg:bottom-0"
-              style={lineOffsetStyles}
+              className="absolute z-10 w-[110%] h-auto pointer-events-none lg:w-[65%] lg:bottom-0"
             >
               <svg 
                 viewBox="0 0 1196 795" 
