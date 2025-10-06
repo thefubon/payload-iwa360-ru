@@ -81,7 +81,7 @@ export const Hero: Block = {
           type: 'select',
           label: 'Стиль бейджа',
           required: true,
-          defaultValue: 'primary',
+          defaultValue: 'meetings',
           options: badgeStyleOptions,
           admin: {
             description: 'Выберите готовый стиль оформления бейджа',
