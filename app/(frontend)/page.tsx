@@ -49,6 +49,22 @@ export default async function Home() {
   const topOffsetXl = lineSettings?.topOffsetXl ?? -100
   const topOffset2xl = lineSettings?.topOffset2xl ?? -100
 
+  // Адаптивные боковые отступы слева
+  const leftOffsetMobile = lineSettings?.leftOffsetMobile ?? 0
+  const leftOffsetSm = lineSettings?.leftOffsetSm ?? 0
+  const leftOffsetMd = lineSettings?.leftOffsetMd ?? 0
+  const leftOffsetLg = lineSettings?.leftOffsetLg ?? 0
+  const leftOffsetXl = lineSettings?.leftOffsetXl ?? 0
+  const leftOffset2xl = lineSettings?.leftOffset2xl ?? 0
+
+  // Адаптивные боковые отступы справа
+  const rightOffsetMobile = lineSettings?.rightOffsetMobile ?? 0
+  const rightOffsetSm = lineSettings?.rightOffsetSm ?? 0
+  const rightOffsetMd = lineSettings?.rightOffsetMd ?? 0
+  const rightOffsetLg = lineSettings?.rightOffsetLg ?? 0
+  const rightOffsetXl = lineSettings?.rightOffsetXl ?? 0
+  const rightOffset2xl = lineSettings?.rightOffset2xl ?? 0
+
   // Адаптивный масштаб
   const scaleMobile = lineSettings?.scaleMobile ?? 105
   const scaleSm = lineSettings?.scaleSm ?? 105
@@ -65,6 +81,18 @@ export default async function Home() {
     '--line-top-lg': `${topOffsetLg}px`,
     '--line-top-xl': `${topOffsetXl}px`,
     '--line-top-2xl': `${topOffset2xl}px`,
+    '--line-left-mobile': `${leftOffsetMobile}px`,
+    '--line-left-sm': `${leftOffsetSm}px`,
+    '--line-left-md': `${leftOffsetMd}px`,
+    '--line-left-lg': `${leftOffsetLg}px`,
+    '--line-left-xl': `${leftOffsetXl}px`,
+    '--line-left-2xl': `${leftOffset2xl}px`,
+    '--line-right-mobile': `${rightOffsetMobile}px`,
+    '--line-right-sm': `${rightOffsetSm}px`,
+    '--line-right-md': `${rightOffsetMd}px`,
+    '--line-right-lg': `${rightOffsetLg}px`,
+    '--line-right-xl': `${rightOffsetXl}px`,
+    '--line-right-2xl': `${rightOffset2xl}px`,
     '--line-scale-mobile': `${scaleMobile}%`,
     '--line-scale-sm': `${scaleSm}%`,
     '--line-scale-md': `${scaleMd}%`,

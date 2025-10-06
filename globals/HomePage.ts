@@ -146,24 +146,119 @@ export const HomePage: GlobalConfig = {
                       ],
                     },
                     {
-                      label: 'Боковые отступы',
+                      label: 'Боковые отступы (Слева)',
                       fields: [
                         {
-                          name: 'leftOffset',
+                          name: 'leftOffsetMobile',
                           type: 'number',
-                          label: 'Отступ слева (px)',
+                          label: 'Mobile (до 640px)',
                           defaultValue: 0,
                           admin: {
-                            description: 'Отступ слева. Может быть отрицательным',
+                            description: 'Отступ слева в пикселях. Может быть отрицательным',
                           },
                         },
                         {
-                          name: 'rightOffset',
+                          name: 'leftOffsetSm',
                           type: 'number',
-                          label: 'Отступ справа (px)',
+                          label: 'SM (640px+)',
                           defaultValue: 0,
                           admin: {
-                            description: 'Отступ справа. Может быть отрицательным',
+                            description: 'Отступ слева в пикселях',
+                          },
+                        },
+                        {
+                          name: 'leftOffsetMd',
+                          type: 'number',
+                          label: 'MD (768px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ слева в пикселях',
+                          },
+                        },
+                        {
+                          name: 'leftOffsetLg',
+                          type: 'number',
+                          label: 'LG (1024px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ слева в пикселях',
+                          },
+                        },
+                        {
+                          name: 'leftOffsetXl',
+                          type: 'number',
+                          label: 'XL (1280px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ слева в пикселях',
+                          },
+                        },
+                        {
+                          name: 'leftOffset2xl',
+                          type: 'number',
+                          label: '2XL (1536px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ слева в пикселях',
+                          },
+                        },
+                      ],
+                    },
+                    {
+                      label: 'Боковые отступы (Справа)',
+                      fields: [
+                        {
+                          name: 'rightOffsetMobile',
+                          type: 'number',
+                          label: 'Mobile (до 640px)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях. Может быть отрицательным',
+                          },
+                        },
+                        {
+                          name: 'rightOffsetSm',
+                          type: 'number',
+                          label: 'SM (640px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях',
+                          },
+                        },
+                        {
+                          name: 'rightOffsetMd',
+                          type: 'number',
+                          label: 'MD (768px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях',
+                          },
+                        },
+                        {
+                          name: 'rightOffsetLg',
+                          type: 'number',
+                          label: 'LG (1024px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях',
+                          },
+                        },
+                        {
+                          name: 'rightOffsetXl',
+                          type: 'number',
+                          label: 'XL (1280px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях',
+                          },
+                        },
+                        {
+                          name: 'rightOffset2xl',
+                          type: 'number',
+                          label: '2XL (1536px+)',
+                          defaultValue: 0,
+                          admin: {
+                            description: 'Отступ справа в пикселях',
                           },
                         },
                       ],

@@ -340,41 +340,53 @@
     background-image: url('/img/GradientLine.svg');
     background-repeat: no-repeat;
     background-size: var(--line-scale-mobile);
-    background-position: center var(--line-top-mobile);
+    background-position: 
+      calc(50% + var(--line-left-mobile)) 
+      var(--line-top-mobile);
   }
 
   @media (min-width: 640px) {
     .page-decorative-line {
       background-size: var(--line-scale-sm);
-      background-position: center var(--line-top-sm);
+      background-position: 
+        calc(50% + var(--line-left-sm)) 
+        var(--line-top-sm);
     }
   }
 
   @media (min-width: 768px) {
     .page-decorative-line {
       background-size: var(--line-scale-md);
-      background-position: center var(--line-top-md);
+      background-position: 
+        calc(50% + var(--line-left-md)) 
+        var(--line-top-md);
     }
   }
 
   @media (min-width: 1024px) {
     .page-decorative-line {
       background-size: var(--line-scale-lg);
-      background-position: center var(--line-top-lg);
+      background-position: 
+        calc(50% + var(--line-left-lg)) 
+        var(--line-top-lg);
     }
   }
 
   @media (min-width: 1280px) {
     .page-decorative-line {
       background-size: var(--line-scale-xl);
-      background-position: center var(--line-top-xl);
+      background-position: 
+        calc(50% + var(--line-left-xl)) 
+        var(--line-top-xl);
     }
   }
 
   @media (min-width: 1536px) {
     .page-decorative-line {
       background-size: var(--line-scale-2xl);
-      background-position: center var(--line-top-2xl);
+      background-position: 
+        calc(50% + var(--line-left-2xl)) 
+        var(--line-top-2xl);
     }
   }
 }
