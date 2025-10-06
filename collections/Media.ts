@@ -1,9 +1,18 @@
 import { CollectionConfig } from 'payload'
+import { isPublic, canCreate, canUpdate, canDelete } from '../access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  admin: {
+    group: 'Контент',
+    description: 'Управление медиафайлами (изображения, видео, документы)',
+  },
   access: {
-    read: () => true, // Публичный доступ для чтения
+    read: isPublic, // Публичный доступ для чтения
+    create: canCreate, // Редакторы и администраторы
+    update: canUpdate, // Редакторы и администраторы
+    delete: canDelete, // Только администраторы
+    admin: ({ req: { user } }) => Boolean(user), // Все авторизованные могут видеть в админке
   },
   fields: [
     {

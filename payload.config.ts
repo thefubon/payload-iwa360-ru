@@ -43,7 +43,9 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI,
     },
-    push: true, // Автоматически обновлять схему базы данных
+    // Автоматически обновлять схему только в development
+    // На production используйте ручные миграции (см. migrations/README.md)
+    push: process.env.NODE_ENV !== 'production',
   }),
 
   // Admin panel configuration

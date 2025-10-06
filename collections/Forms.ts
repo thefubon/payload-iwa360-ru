@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { isPublic, canCreate, canUpdate, canDelete } from '../access'
 
 export const Forms: CollectionConfig = {
   slug: 'forms',
@@ -13,10 +14,11 @@ export const Forms: CollectionConfig = {
     group: 'Почтовый сервер',
   },
   access: {
-    read: () => true, // Формы доступны для чтения всем (для отображения на сайте)
-    create: ({ req: { user } }) => !!user,
-    update: ({ req: { user } }) => !!user,
-    delete: ({ req: { user } }) => !!user,
+    read: isPublic, // Формы доступны для чтения всем (для отображения на сайте)
+    create: canCreate, // Редакторы и администраторы
+    update: canUpdate, // Редакторы и администраторы
+    delete: canDelete, // Только администраторы
+    admin: ({ req: { user } }) => Boolean(user), // Все авторизованные могут видеть в админке
   },
   fields: [
     {

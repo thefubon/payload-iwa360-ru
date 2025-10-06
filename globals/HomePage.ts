@@ -3,15 +3,18 @@ import { Hero } from '../blocks/Hero'
 import { FormBlock } from '../blocks/FormBlock'
 import { Partners } from '../blocks/Partners'
 import { TabsBlock } from '../blocks/TabsBlock'
+import { isPublic, canUpdate } from '../access'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
   label: 'Главная страница',
   admin: {
     group: 'Контент',
+    description: 'Настройки и контент главной страницы сайта',
   },
   access: {
-    read: () => true, // Публичный доступ для чтения
+    read: isPublic, // Публичный доступ для чтения
+    update: canUpdate, // Редакторы и администраторы могут редактировать
   },
   fields: [
     {

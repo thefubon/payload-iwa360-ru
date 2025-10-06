@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { isPublic, isLoggedIn, canDelete } from '../access'
 
 export const FormSubmissions: CollectionConfig = {
   slug: 'form-submissions',
@@ -13,10 +14,11 @@ export const FormSubmissions: CollectionConfig = {
     group: 'Почтовый сервер',
   },
   access: {
-    read: ({ req: { user } }) => !!user,
-    create: () => true, // Любой может создать submission (отправить форму с сайта)
-    update: ({ req: { user } }) => !!user,
-    delete: ({ req: { user } }) => !!user,
+    read: isLoggedIn, // Только авторизованные пользователи могут читать
+    create: isPublic, // Любой может создать submission (отправить форму с сайта)
+    update: () => false, // Никто не может редактировать отправленные формы
+    delete: canDelete, // Только администраторы могут удалять
+    admin: ({ req: { user } }) => Boolean(user), // Все авторизованные могут видеть в админке
   },
   fields: [
     {

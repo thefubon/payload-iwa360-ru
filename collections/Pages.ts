@@ -3,6 +3,7 @@ import { Hero } from '../blocks/Hero'
 import { FormBlock } from '../blocks/FormBlock'
 import { Partners } from '../blocks/Partners'
 import { TabsBlock } from '../blocks/TabsBlock'
+import { isPublic, canCreate, canUpdate, canDelete } from '../access'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -14,9 +15,14 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
     group: 'Контент',
+    description: 'Управление страницами сайта',
   },
   access: {
-    read: () => true, // Публичный доступ для чтения
+    read: isPublic, // Публичный доступ для чтения
+    create: canCreate, // Редакторы и администраторы
+    update: canUpdate, // Редакторы и администраторы
+    delete: canDelete, // Только администраторы
+    admin: ({ req: { user } }) => Boolean(user), // Все авторизованные могут видеть в админке
   },
   fields: [
     {

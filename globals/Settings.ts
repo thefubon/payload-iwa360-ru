@@ -1,10 +1,16 @@
 import { GlobalConfig } from 'payload'
+import { isPublic, canUpdate } from '../access'
 
 export const Settings: GlobalConfig = {
   slug: 'settings',
   label: 'Настройки сайта',
+  admin: {
+    group: 'Контент',
+    description: 'Глобальные настройки сайта (меню, логотип, cookie)',
+  },
   access: {
-    read: () => true, // Публичный доступ для чтения
+    read: isPublic, // Публичный доступ для чтения
+    update: canUpdate, // Редакторы и администраторы могут редактировать
   },
   fields: [
     {
