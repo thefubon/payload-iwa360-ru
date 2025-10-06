@@ -7,8 +7,8 @@ import type { PageComponentProps } from '@/types/components'
 import type { PageResult, GenerateStaticParamsResult } from '@/types/pages'
 import type { Metadata } from 'next'
 
-// Отключаем кэширование для получения актуальных данных
-export const revalidate = 0
+// ISR: Перегенерация каждый час
+export const revalidate = 3600
 
 // Генерация метаданных для SEO
 export async function generateMetadata({ params }: PageComponentProps): Promise<Metadata> {
@@ -45,7 +45,7 @@ export async function generateStaticParams(): Promise<GenerateStaticParamsResult
   
   const pages = await payload.find({
     collection: 'pages',
-    limit: 100,
+    limit: 1000, // Увеличено до 1000
   }) as PageResult
 
   return pages.docs.map((page) => ({

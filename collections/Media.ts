@@ -37,13 +37,19 @@ export const Media: CollectionConfig = {
       {
         name: 'card',
         width: 768,
-        height: 1024,
+        height: 512,
         position: 'centre',
       },
       {
         name: 'tablet',
         width: 1024,
-        // Высота по умолчанию (сохраняет соотношение)
+        height: 768,
+        position: 'centre',
+      },
+      {
+        name: 'hero',
+        width: 1920,
+        height: 1080,
         position: 'centre',
       },
     ],

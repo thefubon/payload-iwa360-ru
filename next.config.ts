@@ -3,6 +3,18 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  compress: true, // Включаем Gzip compression
+  poweredByHeader: false, // Убираем X-Powered-By header
+  
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-navigation-menu',
+      '@radix-ui/react-tabs',
+    ],
+  },
+  
   images: {
     remotePatterns: [
       {

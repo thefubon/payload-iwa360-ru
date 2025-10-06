@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow', // Не индексируем страницу поиска
 }
 
+// ISR: Перегенерация каждый час
+export const revalidate = 3600
+
 export default function Search() {
   return (
     <Suspense fallback={<div className="container mx-auto px-4 py-8">Загрузка...</div>}>
