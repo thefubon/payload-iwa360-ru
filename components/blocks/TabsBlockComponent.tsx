@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { TabsBlockProps } from '@/types/blocks'
@@ -9,7 +9,15 @@ import * as Icons from 'lucide-react'
 import { ProductIcon } from '@/components/icons/ProductIcons'
 
 export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.id || '0')
+  const defaultTab = tabs[0]?.id || '0'
+  const [activeTab, setActiveTab] = useState(defaultTab)
+
+  // Устанавливаем первый таб как активный при монтировании
+  useEffect(() => {
+    if (tabs.length > 0) {
+      setActiveTab(tabs[0]?.id || '0')
+    }
+  }, [tabs])
 
   return (
     <section className="py-8 sm:py-12 lg:py-16">
@@ -20,7 +28,8 @@ export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
           <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
             {/* Tabs List */}
             <TabsList className="
-              flex flex-row lg:flex-col 
+              flex flex-row lg:flex-col
+              flex-nowrap
               w-full lg:w-auto lg:min-w-[200px] xl:min-w-[240px]
               h-auto 
               bg-transparent 
@@ -31,6 +40,8 @@ export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
               snap-x snap-mandatory lg:snap-none
               scrollbar-hide
               [-webkit-overflow-scrolling:touch]
+              justify-start
+              items-start
             ">
             {tabs.map((tab, index) => {
               // Определяем компонент иконки в зависимости от типа
@@ -165,6 +176,18 @@ export default function TabsBlockComponent({ tabs }: TabsBlockProps) {
         /* Smooth momentum scrolling for iOS */
         .scrollbar-hide {
           -webkit-overflow-scrolling: touch;
+        }
+        /* Принудительное выравнивание scroll-контейнера слева */
+        .scrollbar-hide {
+          scroll-padding-left: 0 !important;
+          scroll-snap-align: start;
+        }
+        /* Убираем центрирование содержимого */
+        @media (max-width: 1023px) {
+          [role="tablist"] {
+            justify-content: flex-start !important;
+            align-items: flex-start !important;
+          }
         }
       `}</style>
     </section>
